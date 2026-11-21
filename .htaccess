@@ -1,0 +1,43 @@
+# Root .htaccess — used only when the host cannot point document root at public/.
+# Requires mod_rewrite and AllowOverride All.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Deny direct access to sensitive files and directories
+    RewriteRule ^\.env($|/)                   - [F,L]
+    RewriteRule ^composer\.(json|lock)$       - [F,L]
+    RewriteRule ^vendor(/|$)                  - [F,L]
+    RewriteRule ^storage/logs(/|$)            - [F,L]
+    RewriteRule ^storage/app/backups(/|$)     - [F,L]
+    RewriteRule ^bootstrap/cache(/|$)         - [F,L]
+    RewriteRule ^artisan$                     - [F,L]
+
+    # Allow public/ files to be served directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/public/
+    # Route everything else through the root index.php
+    RewriteRule ^(.*)$ index.php [L]
+</IfModule>
+
+# Deny access to any file at the root that is not index.php
+<FilesMatch "^(?!index\.php$).*$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Allow index.php
+<Files "index.php">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Allow from all
+    </IfModule>
+</Files>

@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['owner', 'admin', 'editor', 'translator'])->default('editor');
+            $table->foreignId('invited_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp('last_active_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

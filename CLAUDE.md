@@ -90,7 +90,7 @@ Self-hosted in `public/fonts/`:
 Run before every release ZIP is built:
 
 ```bash
-grep -rni "adafp" --include="*.php" --include="*.blade.php" --include="*.js" --include="*.css" --include="*.json" --include="*.md" --exclude-dir=.git --exclude-dir=docs --exclude-dir=tests .
+grep -rni "adafp" --include="*.php" --include="*.blade.php" --include="*.js" --include="*.css" --include="*.json" --include="*.md" --exclude-dir=.git --exclude-dir=docs --exclude-dir=tests --exclude=CLAUDE.md --exclude=CHANGELOG.md .
 ```
 
-Must return **zero results**.
+Must return **zero results**. (`CLAUDE.md` and `CHANGELOG.md` are internal build docs, never distributed.)

@@ -15,7 +15,7 @@ Versioning: [Semantic Versioning](https://semver.org/).
 - `config/cms.php`: product_name, version, instance, feature flags, panel_path, supported locales.
 - Self-hosted fonts directory (`public/fonts/`): Inter and Playfair Display (to be downloaded, Phase 1b).
 - `VERSION` file (semver).
-- `LICENSE`: proprietary, ADAFP — draft, pending legal review.
+- `LICENSE`: proprietary — draft, pending legal review.
 - `CLAUDE.md`: build notes and decisions log.
 - Packages: `laravel/fortify`, `intervention/image`, `mews/purifier`, `spatie/laravel-sitemap`.
 - Tailwind CSS v4 + Vite (via `@tailwindcss/vite`).
