@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/*
+ * Self-hosted fonts — files must be downloaded to public/fonts/ before build.
+ * Inter: https://rsms.me/inter/ (OFL licence)
+ * Playfair Display: https://fonts.google.com/specimen/Playfair+Display (OFL licence)
+ *
+ * Run scripts/download-fonts.sh (Phase 1b) to fetch both font families.
+ */
+
+/* Inter — variable font */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter/InterVariable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter/InterVariable-Italic.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Playfair Display — variable font */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('/fonts/playfair/PlayfairDisplay-Variable.woff2') format('woff2');
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('/fonts/playfair/PlayfairDisplay-Italic-Variable.woff2') format('woff2');
+    font-weight: 400 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+}
