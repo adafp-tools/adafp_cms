@@ -1,0 +1,1 @@
+@include('themes.classic.maintenance')

@@ -141,6 +141,14 @@ Route::middleware(['web', \App\Http\Middleware\EnsureInstalled::class, \App\Http
 
                 // AI Translation (JSON endpoint)
                 Route::post('/ai-translate', [AiTranslationController::class, 'translate'])->name('ai.translate');
+
+                // Settings
+                Route::get('/settings', [\App\Http\Controllers\Panel\SettingsController::class, 'index'])->name('settings.index');
+                Route::post('/settings', [\App\Http\Controllers\Panel\SettingsController::class, 'update'])->name('settings.update');
+                Route::post('/settings/logo', [\App\Http\Controllers\Panel\SettingsController::class, 'logo'])->name('settings.logo');
+
+                // Analytics
+                Route::get('/analytics', [\App\Http\Controllers\Panel\AnalyticsController::class, 'index'])->name('analytics');
             });
         });
     });

@@ -1,0 +1,154 @@
+@extends('panel.layout')
+@section('title', 'Settings')
+
+@section('content')
+<div class="max-w-2xl">
+
+    @if(session('success'))
+        <div class="mb-4 p-3 bg-green-50 border border-green-200 text-green-800 rounded text-sm">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- Logo upload --}}
+    <div class="bg-white rounded-lg border border-slate-200 p-6 mb-6">
+        <h2 class="font-semibold text-slate-700 mb-4">Site Logo</h2>
+        @if(!empty($settings['logo_path']))
+            <img src="{{ url('storage/' . $settings['logo_path']) }}" alt="Current logo" class="h-16 mb-4">
+        @endif
+        <form method="POST" action="{{ route('panel.settings.logo') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="flex items-center gap-3">
+                <input type="file" name="logo" accept="image/*"
+                       class="text-sm file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                <button type="submit" class="px-4 py-2 bg-slate-700 text-white rounded text-sm hover:bg-slate-600">Upload</button>
+            </div>
+            @error('logo') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+        </form>
+    </div>
+
+    {{-- Main settings form --}}
+    <form method="POST" action="{{ route('panel.settings.update') }}" class="bg-white rounded-lg border border-slate-200 p-6 space-y-5">
+        @csrf
+
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1" for="site_name">Site name</label>
+            <input id="site_name" name="site_name" type="text" value="{{ old('site_name', $settings['site_name']) }}"
+                   class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400" required>
+            @error('site_name') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1" for="theme">Theme</label>
+            <select id="theme" name="theme"
+                    class="border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                <option value="classic" @selected(old('theme', $settings['theme']) === 'classic')>Classic</option>
+                <option value="campaign" @selected(old('theme', $settings['theme']) === 'campaign')>Campaign</option>
+            </select>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+            @foreach(['primary_color' => 'Primary colour', 'secondary_color' => 'Secondary colour', 'text_on_primary' => 'Text on primary'] as $key => $label)
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="{{ $key }}">{{ $label }}</label>
+                <div class="flex items-center gap-2">
+                    <input type="color" id="{{ $key }}_picker" value="{{ old($key, $settings[$key]) }}"
+                           oninput="document.getElementById('{{ $key }}').value = this.value"
+                           class="h-9 w-10 rounded border border-slate-300 cursor-pointer p-0.5">
+                    <input id="{{ $key }}" name="{{ $key }}" type="text"
+                           value="{{ old($key, $settings[$key]) }}"
+                           pattern="^#[0-9a-fA-F]{6}$"
+                           class="flex-1 border border-slate-300 rounded px-2 py-1.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-400">
+                </div>
+                @error($key) <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
+            @endforeach
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1" for="default_locale">Default locale</label>
+            <select id="default_locale" name="default_locale"
+                    class="border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                @foreach($supportedLocales as $lc)
+                    <option value="{{ $lc }}" @selected(old('default_locale', $settings['default_locale']) === $lc)>{{ strtoupper($lc) }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <fieldset>
+                <legend class="block text-sm font-medium text-slate-700 mb-2">Active locales</legend>
+                <div class="flex flex-wrap gap-4">
+                    @foreach($supportedLocales as $lc)
+                        @php
+                            $activeList = array_map('trim', explode(',', $settings['active_locales']));
+                        @endphp
+                        <label class="flex items-center gap-2 text-sm cursor-pointer">
+                            <input type="checkbox" name="active_locales_check[]" value="{{ $lc }}"
+                                   @checked(in_array($lc, $activeList))
+                                   class="rounded focus:ring-2 focus:ring-slate-400">
+                            {{ strtoupper($lc) }}
+                        </label>
+                    @endforeach
+                </div>
+                {{-- Hidden computed field --}}
+                <input type="hidden" id="active_locales_hidden" name="active_locales" value="{{ old('active_locales', $settings['active_locales']) }}">
+            </fieldset>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+            @foreach(['maintenance_mode' => 'Maintenance mode', 'noindex' => 'Block search engines (noindex)', 'page_counter_enabled' => 'Page counter'] as $key => $label)
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+                <input type="hidden" name="{{ $key }}" value="0">
+                <input type="checkbox" name="{{ $key }}" value="1"
+                       @checked((string)(old($key, $settings[$key])) === '1')
+                       class="rounded focus:ring-2 focus:ring-slate-400">
+                {{ $label }}
+            </label>
+            @endforeach
+        </div>
+
+        <hr class="border-slate-200">
+
+        <details class="text-sm">
+            <summary class="font-medium text-slate-700 cursor-pointer">AI Translation settings</summary>
+            <div class="mt-3 space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="ai_anthropic_key">Anthropic API key</label>
+                    <input id="ai_anthropic_key" name="ai_anthropic_key" type="password" autocomplete="new-password"
+                           placeholder="Leave blank to keep existing key"
+                           class="w-full border border-slate-300 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-400">
+                    <p class="text-xs text-slate-400 mt-1">Stored encrypted. Never logged or displayed.</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="ai_glossary">Translation glossary</label>
+                    <textarea id="ai_glossary" name="ai_glossary" rows="4"
+                              placeholder="One term per line: English term = translated term"
+                              class="w-full border border-slate-300 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-400">{{ old('ai_glossary', $settings['ai_glossary']) }}</textarea>
+                </div>
+            </div>
+        </details>
+
+        <div class="pt-2">
+            <button type="submit"
+                    class="px-6 py-2 bg-slate-800 text-white rounded font-medium hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                Save settings
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+// Sync checkboxes → hidden field for active_locales
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('input[name="active_locales_check[]"]');
+    const hidden     = document.getElementById('active_locales_hidden');
+    function update() {
+        const vals = Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
+        hidden.value = vals.join(',') || 'en';
+    }
+    checkboxes.forEach(c => c.addEventListener('change', update));
+    update();
+});
+</script>
+@endsection

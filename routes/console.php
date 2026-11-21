@@ -10,3 +10,8 @@ Artisan::command('inspire', function () {
 
 // Publish scheduled content every minute.
 Schedule::command('cms:publish-scheduled')->everyMinute();
+
+// Clean page view records older than 90 days, once a week.
+Schedule::call(function () {
+    \App\Models\PageView::where('viewed_at', '<', now()->subDays(90))->delete();
+})->weekly();

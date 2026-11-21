@@ -62,7 +62,16 @@
             @endcan
 
             @can('manageSettings', App\Models\User::class)
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Settings</a>
+            <a href="{{ route('panel.settings.index') }}"
+               class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.settings*') ? 'bg-slate-700 text-white' : '' }}">
+                ⚙ Settings
+            </a>
+            @if(\App\Models\Setting::get('page_counter_enabled', '0') === '1')
+            <a href="{{ route('panel.analytics') }}"
+               class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.analytics') ? 'bg-slate-700 text-white' : '' }}">
+                📊 Analytics
+            </a>
+            @endif
             @endcan
         </nav>
 

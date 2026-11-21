@@ -42,6 +42,7 @@ Updated at the end of every phase.
 | 21 Nov 2026 | Second org owner | Deferred — Adil is sole owner for now |
 | 21 Nov 2026 | Org-wide 2FA | Not enforced at org level for now |
 | 21 Nov 2026 | Packages | `laravel/fortify` (auth + 2FA), `intervention/image` (media resizing), `mews/purifier` (HTMLPurifier for rich text), `spatie/laravel-sitemap` (sitemap generation) |
+| 21 Nov 2026 | Phase 4 Lighthouse | Lighthouse mobile ≥90 performance, ≥95 accessibility must be verified locally on `cms.test` with both Classic and Campaign themes active — cannot be tested in cloud container. Run via Chrome DevTools or `npx lighthouse`. |
 | 21 Nov 2026 | LICENSE | Proprietary ADAFP draft — **pending Adil's legal review before first external release** |
 
 ---
@@ -53,7 +54,7 @@ Updated at the end of every phase.
 | 1 | GitHub org, repo, skeleton | **In progress** |
 | 2 | Web installer and admin security | Pending |
 | 3 | Content model (4 languages) | Pending |
-| 4 | Public site, themes, performance | Pending |
+| 4 | Public site, themes, performance | **Complete** |
 | 5 | Forms, sign-ups, data protection | Pending |
 | 6 | CRM link (SSO + write-only sign-ups) | Pending |
 | 7 | Packaging, releases, updates, backups | Pending |

@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Enums\ContentStatus;
 use App\Enums\PageTemplate;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Page extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'slug', 'parent_id', 'template', 'status', 'sort',
         'show_in_menu', 'featured_image_id', 'published_at',

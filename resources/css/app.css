@@ -45,3 +45,9 @@
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
 }
+
+@media print {
+    header, footer, nav, .print\:hidden { display: none !important; }
+    main { width: 100% !important; }
+    a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #555; }
+}

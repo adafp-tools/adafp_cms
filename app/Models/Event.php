@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Enums\ContentStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'slug', 'starts_at', 'ends_at', 'timezone', 'location',
         'online_url', 'status', 'published_at', 'created_by', 'updated_by',
