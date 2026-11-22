@@ -49,6 +49,7 @@ Updated at the end of every phase.
 | 22 Nov 2026 | Phase 11 final check | 95/95 tests · neutrality zero · `npm run build` clean · no `env()` outside config/ · all code phases complete · deployment/provision/handover scripts committed |
 | 22 Nov 2026 | `cms:release` subprocess env | PHPUnit `<env>` tags use `force=false`; parent `.env` vars (`QUEUE_CONNECTION` etc.) leaked into child and caused `CrmPushTest` to fail in-process. Fixed by explicitly exporting `QUEUE_CONNECTION=sync CACHE_STORE=array SESSION_DRIVER=array DB_CONNECTION=sqlite DB_DATABASE=:memory:` in the `exec()` prefix in `ReleaseCommand`. |
 | 22 Nov 2026 | Release v0.1.0 | First release ZIP built: `cms-0.1.0-20261122.zip` (417 KB, 381 files). Deployment runbook: `docs/phase8-deploy-cms.adafp.org.md`. |
+| 22 Nov 2026 | Release v0.2.0 | ZIP `cms-0.2.0-20261122.zip` (12 MB, vendor/ included). Two deploy-time fixes: (1) `public/robots.txt` static file removed — it shadowed the RobotsController demo route; (2) `DemoSeeder`: `translated_by='demo'` → `'human'`, MenuLocation enum array keys replaced with string values (`'header'`/`'footer'`) — PHP 8.4 rejects enum instances as array literal keys. Live smoke test on cms.adafp.org: 9/9 pass. |
 
 ---
 
