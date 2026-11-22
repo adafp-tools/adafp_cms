@@ -44,6 +44,7 @@ Updated at the end of every phase.
 | 21 Nov 2026 | Packages | `laravel/fortify` (auth + 2FA), `intervention/image` (media resizing), `mews/purifier` (HTMLPurifier for rich text), `spatie/laravel-sitemap` (sitemap generation) |
 | 21 Nov 2026 | Phase 4 Lighthouse | Lighthouse mobile ≥90 performance, ≥95 accessibility must be verified locally on `cms.test` with both Classic and Campaign themes active — cannot be tested in cloud container. Run via Chrome DevTools or `npx lighthouse`. |
 | 21 Nov 2026 | LICENSE | Proprietary ADAFP draft — **pending Adil's legal review before first external release** |
+| 22 Nov 2026 | Phase 11 final check | 95/95 tests · neutrality zero · `npm run build` clean · no `env()` outside config/ · all code phases complete · deployment/provision/handover scripts committed |
 
 ---
 
@@ -51,9 +52,9 @@ Updated at the end of every phase.
 
 | Phase | Title | Status |
 |---|---|---|
-| 1 | GitHub org, repo, skeleton | **In progress** |
-| 2 | Web installer and admin security | Pending |
-| 3 | Content model (4 languages) | Pending |
+| 1 | GitHub org, repo, skeleton | **Complete** |
+| 2 | Web installer and admin security | **Complete** |
+| 3 | Content model (4 languages) | **Complete** |
 | 4 | Public site, themes, performance | **Complete** |
 | 5 | Forms, sign-ups, data protection | **Complete** |
 | 6 | CRM link (SSO + write-only sign-ups) | **Complete** |
@@ -61,7 +62,7 @@ Updated at the end of every phase.
 | 8 | Demo site at cms.adafp.org | **Scripts ready — deploy manually** |
 | 9 | Hosted service on frepro.org | **Scripts ready — provision manually** |
 | 10 | Pilot (Sudan National Trend Party) + handover | **Handover kit ready — pilot TBD** |
-| 11 | Final check | Pending |
+| 11 | Final check | **Complete** |
 
 ---
 
