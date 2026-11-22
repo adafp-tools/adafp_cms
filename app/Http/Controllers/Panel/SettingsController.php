@@ -25,7 +25,13 @@ class SettingsController extends Controller
             'maintenance_mode'    => Setting::get('maintenance_mode', '0'),
             'noindex'             => Setting::get('noindex', '0'),
             'page_counter_enabled'=> Setting::get('page_counter_enabled', '0'),
-            'ai_glossary'         => Setting::get('ai_glossary', ''),
+            'ai_glossary'              => Setting::get('ai_glossary', ''),
+            'notification_email'       => Setting::get('notification_email', ''),
+            'notification_from_name'   => Setting::get('notification_from_name', config('cms.product_name')),
+            'notification_from_email'  => Setting::get('notification_from_email', ''),
+            'join_form_enabled'        => Setting::get('join_form_enabled', '1'),
+            'contact_form_enabled'     => Setting::get('contact_form_enabled', '1'),
+            'privacy_policy_url'       => Setting::get('privacy_policy_url', ''),
         ];
         $supportedLocales = config('cms.supported_locales', ['en']);
         return view('panel.settings', compact('settings', 'supportedLocales'));
@@ -43,15 +49,25 @@ class SettingsController extends Controller
             'active_locales'   => ['required', 'string'],
             'maintenance_mode' => ['required', 'in:0,1'],
             'noindex'          => ['required', 'in:0,1'],
-            'page_counter_enabled' => ['required', 'in:0,1'],
+            'page_counter_enabled'    => ['required', 'in:0,1'],
+            'notification_email'      => ['nullable', 'email', 'max:255'],
+            'notification_from_name'  => ['nullable', 'string', 'max:200'],
+            'notification_from_email' => ['nullable', 'email', 'max:255'],
+            'join_form_enabled'       => ['nullable', 'in:0,1'],
+            'contact_form_enabled'    => ['nullable', 'in:0,1'],
+            'privacy_policy_url'      => ['nullable', 'string', 'max:500'],
         ]);
 
         $keys = ['theme','primary_color','secondary_color','text_on_primary',
                  'site_name','default_locale','active_locales','maintenance_mode',
-                 'noindex','page_counter_enabled'];
+                 'noindex','page_counter_enabled',
+                 'notification_email','notification_from_name','notification_from_email',
+                 'join_form_enabled','contact_form_enabled','privacy_policy_url'];
 
+        $booleanKeys = ['maintenance_mode', 'noindex', 'page_counter_enabled', 'join_form_enabled', 'contact_form_enabled'];
         foreach ($keys as $key) {
-            Setting::set($key, $r->input($key, ''));
+            $default = in_array($key, $booleanKeys, true) ? '0' : '';
+            Setting::set($key, $r->input($key, $default));
         }
 
         // AI key — only update if provided

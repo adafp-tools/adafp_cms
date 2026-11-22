@@ -110,6 +110,59 @@
 
         <hr class="border-slate-200">
 
+        <hr class="border-slate-200">
+
+        <details class="text-sm">
+            <summary class="font-medium text-slate-700 cursor-pointer">Forms &amp; notifications</summary>
+            <div class="mt-3 space-y-3">
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer">
+                        <input type="hidden" name="contact_form_enabled" value="0">
+                        <input type="checkbox" name="contact_form_enabled" value="1"
+                               @checked((string)(old('contact_form_enabled', $settings['contact_form_enabled'])) === '1')
+                               class="rounded focus:ring-2 focus:ring-slate-400">
+                        Enable contact form
+                    </label>
+                    <label class="flex items-center gap-2 text-sm cursor-pointer">
+                        <input type="hidden" name="join_form_enabled" value="0">
+                        <input type="checkbox" name="join_form_enabled" value="1"
+                               @checked((string)(old('join_form_enabled', $settings['join_form_enabled'])) === '1')
+                               class="rounded focus:ring-2 focus:ring-slate-400">
+                        Enable join/membership form
+                    </label>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="notification_email">Notification email</label>
+                    <input id="notification_email" name="notification_email" type="email" max="255"
+                           value="{{ old('notification_email', $settings['notification_email']) }}"
+                           placeholder="Submissions sent here — leave blank to disable"
+                           class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                    @error('notification_email') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1" for="notification_from_name">From name</label>
+                        <input id="notification_from_name" name="notification_from_name" type="text" max="200"
+                               value="{{ old('notification_from_name', $settings['notification_from_name']) }}"
+                               class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1" for="notification_from_email">From email</label>
+                        <input id="notification_from_email" name="notification_from_email" type="email" max="255"
+                               value="{{ old('notification_from_email', $settings['notification_from_email']) }}"
+                               class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="privacy_policy_url">Privacy policy URL</label>
+                    <input id="privacy_policy_url" name="privacy_policy_url" type="text" max="500"
+                           value="{{ old('privacy_policy_url', $settings['privacy_policy_url']) }}"
+                           placeholder="https://... or /en/privacy"
+                           class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+                </div>
+            </div>
+        </details>
+
         <details class="text-sm">
             <summary class="font-medium text-slate-700 cursor-pointer">AI Translation settings</summary>
             <div class="mt-3 space-y-3">

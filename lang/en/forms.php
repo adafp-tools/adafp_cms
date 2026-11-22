@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'contact_title'  => 'Contact Us',
+    'join_title'     => 'Join the Party',
+    'name'           => 'Full name',
+    'email'          => 'Email address',
+    'phone'          => 'Phone number',
+    'subject'        => 'Subject',
+    'message'        => 'Message',
+    'dob'            => 'Date of birth',
+    'address'        => 'Address',
+    'party_role'     => 'I want to',
+    'role_member'    => 'Become a member',
+    'role_volunteer' => 'Volunteer',
+    'role_candidate' => 'Stand as a candidate',
+    'consent_label'  => 'I consent to my personal data being stored and used to respond to this request',
+    'privacy_policy' => 'Privacy policy',
+    'submit_contact' => 'Send message',
+    'submit_join'    => 'Submit application',
+    'success_contact'=> 'Thank you for your message. We will be in touch.',
+    'success_join'   => 'Thank you for your application. We will review it and contact you.',
+    'form_disabled'  => 'This form is currently unavailable.',
+    'rate_limited'   => 'Too many submissions. Please try again later.',
+];

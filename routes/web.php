@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\DocumentsController;
 use App\Http\Controllers\Public\EventController;
 use App\Http\Controllers\Public\FeedController;
 use App\Http\Controllers\Public\GalleryController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\JoinController;
 use App\Http\Controllers\Public\PageController;
 use App\Http\Controllers\Public\PeopleController;
 use App\Http\Controllers\Public\PostController;
@@ -35,6 +37,10 @@ Route::prefix('{locale}')
         Route::get('/leadership', [PeopleController::class, 'index'])->name('public.leadership');
         Route::get('/documents', [DocumentsController::class, 'index'])->name('public.documents');
         Route::get('/gallery/{slug}', [GalleryController::class, 'show'])->name('public.gallery.show');
+        Route::get('/contact',  [ContactController::class, 'show'])->name('public.contact');
+        Route::post('/contact', [ContactController::class, 'submit'])->name('public.contact.submit');
+        Route::get('/join',     [JoinController::class, 'show'])->name('public.join');
+        Route::post('/join',    [JoinController::class, 'submit'])->name('public.join.submit');
         // Generic page slug last (catch-all within locale)
         Route::get('/{slug}', [PageController::class, 'show'])->name('public.page.show');
     });

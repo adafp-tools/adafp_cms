@@ -15,3 +15,6 @@ Schedule::command('cms:publish-scheduled')->everyMinute();
 Schedule::call(function () {
     \App\Models\PageView::where('viewed_at', '<', now()->subDays(90))->delete();
 })->weekly();
+
+// GDPR erasure: hard-delete old form submissions, once a month.
+Schedule::command('cms:gdpr-erase')->monthly();

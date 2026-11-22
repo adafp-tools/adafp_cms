@@ -13,7 +13,7 @@ class PageController extends Controller
 {
     use ResolvesLocale;
 
-    public function show(string $locale, string $slug): View|\Illuminate\Http\RedirectResponse
+    public function show(string $locale, string $slug): View
     {
         $page = Page::where('slug', $slug)
             ->where('status', ContentStatus::Published)
@@ -26,12 +26,6 @@ class PageController extends Controller
 
         if (! $translation) {
             abort(404);
-        }
-
-        // Redirect template pages to their dedicated routes
-        $template = $page->template?->value ?? 'default';
-        if ($template === 'contact') {
-            return redirect()->route('public.page.show', ['locale' => $locale, 'slug' => $slug]);
         }
 
         $body = $translation->body ? EmbedHelper::transform($translation->body) : '';

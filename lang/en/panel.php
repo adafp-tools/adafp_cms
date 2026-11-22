@@ -124,4 +124,33 @@ return [
 
     // AI
     'ai_translate' => 'Translate with AI',
+
+    // Submissions
+    'submissions'          => 'Submissions',
+    'submission_detail'    => 'Submission detail',
+    'back_to_submissions'  => 'Back to submissions',
+    'all_types'            => 'All types',
+    'all_statuses'         => 'All statuses',
+    'contact'              => 'Contact',
+    'join'                 => 'Join',
+    'unread'               => 'Unread',
+    'read'                 => 'Read',
+    'type'                 => 'Type',
+    'name'                 => 'Name',
+    'email'                => 'Email',
+    'locale'               => 'Locale',
+    'received'             => 'Received',
+    'status'               => 'Status',
+    'view'                 => 'View',
+    'delete'               => 'Delete',
+    'delete_confirm'       => 'Delete this submission? This action can be undone by an admin.',
+    'purge_confirm'        => 'Permanently delete all soft-deleted submissions older than 90 days?',
+    'no_submissions'       => 'No submissions found.',
+    'mark_read'            => 'Mark as read',
+    'export_csv'           => 'Export CSV',
+    'purge_deleted'        => 'Purge old deleted',
+    'submission_deleted'   => 'Submission deleted.',
+    'submission_marked_read' => 'Marked as read.',
+    'submission_purged'    => ':count submission(s) permanently deleted.',
+    'consent_at'           => 'Consent given at',
 ];

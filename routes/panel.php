@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\AuthController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\HealthController;
+use App\Http\Controllers\Panel\SubmissionsController;
 use App\Http\Controllers\Panel\TwoFactorController;
 use App\Http\Controllers\Panel\UsersController;
 use App\Http\Controllers\Panel\Content\AiTranslationController;
@@ -141,6 +142,16 @@ Route::middleware(['web', \App\Http\Middleware\EnsureInstalled::class, \App\Http
 
                 // AI Translation (JSON endpoint)
                 Route::post('/ai-translate', [AiTranslationController::class, 'translate'])->name('ai.translate');
+
+                // Submissions
+                Route::prefix('submissions')->name('submissions.')->group(function () {
+                    Route::get('/',            [SubmissionsController::class, 'index'])->name('index');
+                    Route::get('/{id}',        [SubmissionsController::class, 'show'])->name('show');
+                    Route::delete('/{id}',     [SubmissionsController::class, 'destroy'])->name('destroy');
+                    Route::post('/export',     [SubmissionsController::class, 'export'])->name('export');
+                    Route::post('/{id}/read',  [SubmissionsController::class, 'markRead'])->name('read');
+                    Route::post('/purge',      [SubmissionsController::class, 'purge'])->name('purge');
+                });
 
                 // Settings
                 Route::get('/settings', [\App\Http\Controllers\Panel\SettingsController::class, 'index'])->name('settings.index');
