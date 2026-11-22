@@ -217,7 +217,7 @@ class DemoSeeder extends Seeder
             foreach ($translations as $locale => $t) {
                 $page->translations()->updateOrCreate(
                     ['locale' => $locale],
-                    array_merge($t, ['translated_by' => 'demo', 'reviewed' => true])
+                    array_merge($t, ['translated_by' => 'human', 'reviewed' => true])
                 );
             }
         }
@@ -351,7 +351,7 @@ class DemoSeeder extends Seeder
             foreach ($translations as $locale => $t) {
                 $post->translations()->updateOrCreate(
                     ['locale' => $locale],
-                    array_merge($t, ['translated_by' => 'demo', 'reviewed' => true])
+                    array_merge($t, ['translated_by' => 'human', 'reviewed' => true])
                 );
             }
         }
@@ -435,7 +435,7 @@ class DemoSeeder extends Seeder
             foreach ($translations as $locale => $t) {
                 $event->translations()->updateOrCreate(
                     ['locale' => $locale],
-                    array_merge($t, ['translated_by' => 'demo', 'reviewed' => true])
+                    array_merge($t, ['translated_by' => 'human', 'reviewed' => true])
                 );
             }
         }
@@ -522,7 +522,7 @@ class DemoSeeder extends Seeder
             foreach ($translations as $locale => $t) {
                 $person->translations()->updateOrCreate(
                     ['locale' => $locale],
-                    array_merge($t, ['translated_by' => 'demo', 'reviewed' => true])
+                    array_merge($t, ['translated_by' => 'human', 'reviewed' => true])
                 );
             }
         }
@@ -563,7 +563,7 @@ class DemoSeeder extends Seeder
         foreach ($docTranslations as $locale => $t) {
             $document->translations()->updateOrCreate(
                 ['locale' => $locale],
-                array_merge($t, ['translated_by' => 'demo', 'reviewed' => true])
+                array_merge($t, ['translated_by' => 'human', 'reviewed' => true])
             );
         }
     }
@@ -575,7 +575,7 @@ class DemoSeeder extends Seeder
         $locales = ['en', 'fr', 'ar', 'pt'];
 
         $menuDefs = [
-            MenuLocation::Header => [
+            'header' => [
                 'en' => [
                     ['url' => '/en',          'label' => ['en' => 'Home',     'fr' => 'Accueil',          'ar' => 'الرئيسية',  'pt' => 'Início']],
                     ['url' => '/en/about',    'label' => ['en' => 'About',    'fr' => 'À propos',         'ar' => 'من نحن',    'pt' => 'Sobre']],
@@ -605,7 +605,7 @@ class DemoSeeder extends Seeder
                     ['url' => '/pt/join',     'label' => ['en' => 'Join',     'fr' => 'Nous rejoindre',   'ar' => 'انضم إلينا','pt' => 'Aderir']],
                 ],
             ],
-            MenuLocation::Footer => [
+            'footer' => [
                 'en' => [
                     ['url' => '/en/about',     'label' => ['en' => 'About',     'fr' => 'À propos',   'ar' => 'من نحن',      'pt' => 'Sobre']],
                     ['url' => '/en/contact',   'label' => ['en' => 'Contact',   'fr' => 'Contact',    'ar' => 'اتصل بنا',    'pt' => 'Contacto']],
@@ -629,15 +629,15 @@ class DemoSeeder extends Seeder
             ],
         ];
 
-        foreach ($menuDefs as $location => $localeItems) {
-            $menu = Menu::firstOrCreate(['location' => $location]);
+        foreach ($menuDefs as $locationStr => $localeItems) {
+            $menu = Menu::firstOrCreate(['location' => MenuLocation::from($locationStr)]);
 
             foreach ($locales as $locale) {
                 $menu->translations()->updateOrCreate(
                     ['locale' => $locale],
                     [
                         'items'         => $localeItems[$locale] ?? [],
-                        'translated_by' => 'demo',
+                        'translated_by' => 'human',
                         'reviewed'      => true,
                     ]
                 );
