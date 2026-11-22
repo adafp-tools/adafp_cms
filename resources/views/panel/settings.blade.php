@@ -182,6 +182,58 @@
             </div>
         </details>
 
+        {{-- CRM integration --}}
+        <fieldset class="border border-slate-200 rounded-lg p-4 space-y-4">
+            <legend class="text-sm font-semibold text-slate-700 px-2">CRM integration (optional)</legend>
+
+            <div class="flex items-center gap-3">
+                <input type="hidden" name="crm_push_enabled" value="0">
+                <input id="crm_push_enabled" name="crm_push_enabled" type="checkbox" value="1"
+                       {{ old('crm_push_enabled', $settings['crm_push_enabled']) == '1' ? 'checked' : '' }}
+                       class="rounded border-slate-300 text-slate-700 focus:ring-slate-400">
+                <label for="crm_push_enabled" class="text-sm font-medium text-slate-700">Enable write-only push to CRM on join submissions</label>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="crm_webhook_url">CRM webhook URL</label>
+                <input id="crm_webhook_url" name="crm_webhook_url" type="url" max="500"
+                       value="{{ old('crm_webhook_url', $settings['crm_webhook_url']) }}"
+                       placeholder="https://crm.example.com/webhooks/cms"
+                       class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                @error('crm_webhook_url') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="crm_webhook_secret">CRM webhook secret</label>
+                <input id="crm_webhook_secret" name="crm_webhook_secret" type="password" max="500"
+                       placeholder="{{ $settings['crm_webhook_secret_set'] ? '••••••••' : 'Enter secret to set or update' }}"
+                       autocomplete="new-password"
+                       class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                @if($settings['crm_webhook_secret_set'])
+                    <p class="text-slate-500 text-xs mt-1">Secret is set. Leave blank to keep existing.</p>
+                @endif
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 flex items-center gap-3">
+                <input type="hidden" name="crm_sso_enabled" value="0">
+                <input id="crm_sso_enabled" name="crm_sso_enabled" type="checkbox" value="1"
+                       {{ old('crm_sso_enabled', $settings['crm_sso_enabled']) == '1' ? 'checked' : '' }}
+                       class="rounded border-slate-300 text-slate-700 focus:ring-slate-400">
+                <label for="crm_sso_enabled" class="text-sm font-medium text-slate-700">Enable SSO login from CRM</label>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="crm_sso_secret">CRM SSO secret</label>
+                <input id="crm_sso_secret" name="crm_sso_secret" type="password" max="500"
+                       placeholder="{{ $settings['crm_sso_secret_set'] ? '••••••••' : 'Enter secret to set or update' }}"
+                       autocomplete="new-password"
+                       class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                @if($settings['crm_sso_secret_set'])
+                    <p class="text-slate-500 text-xs mt-1">Secret is set. Leave blank to keep existing.</p>
+                @endif
+            </div>
+        </fieldset>
+
         <div class="pt-2">
             <button type="submit"
                     class="px-6 py-2 bg-slate-800 text-white rounded font-medium hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:outline-none">

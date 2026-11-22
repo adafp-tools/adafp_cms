@@ -32,6 +32,11 @@ class SettingsController extends Controller
             'join_form_enabled'        => Setting::get('join_form_enabled', '1'),
             'contact_form_enabled'     => Setting::get('contact_form_enabled', '1'),
             'privacy_policy_url'       => Setting::get('privacy_policy_url', ''),
+            'crm_push_enabled'         => Setting::get('crm_push_enabled', '0'),
+            'crm_webhook_url'          => Setting::get('crm_webhook_url', ''),
+            'crm_webhook_secret_set'   => ! empty(Setting::get('crm_webhook_secret', '')),
+            'crm_sso_enabled'          => Setting::get('crm_sso_enabled', '0'),
+            'crm_sso_secret_set'       => ! empty(Setting::get('crm_sso_secret', '')),
         ];
         $supportedLocales = config('cms.supported_locales', ['en']);
         return view('panel.settings', compact('settings', 'supportedLocales'));
@@ -56,15 +61,22 @@ class SettingsController extends Controller
             'join_form_enabled'       => ['nullable', 'in:0,1'],
             'contact_form_enabled'    => ['nullable', 'in:0,1'],
             'privacy_policy_url'      => ['nullable', 'string', 'max:500'],
+            'crm_push_enabled'        => ['nullable', 'in:0,1'],
+            'crm_webhook_url'         => ['nullable', 'url', 'max:500'],
+            'crm_webhook_secret'      => ['nullable', 'string', 'max:500'],
+            'crm_sso_enabled'         => ['nullable', 'in:0,1'],
+            'crm_sso_secret'          => ['nullable', 'string', 'max:500'],
         ]);
 
         $keys = ['theme','primary_color','secondary_color','text_on_primary',
                  'site_name','default_locale','active_locales','maintenance_mode',
                  'noindex','page_counter_enabled',
                  'notification_email','notification_from_name','notification_from_email',
-                 'join_form_enabled','contact_form_enabled','privacy_policy_url'];
+                 'join_form_enabled','contact_form_enabled','privacy_policy_url',
+                 'crm_push_enabled','crm_webhook_url',
+                 'crm_sso_enabled'];
 
-        $booleanKeys = ['maintenance_mode', 'noindex', 'page_counter_enabled', 'join_form_enabled', 'contact_form_enabled'];
+        $booleanKeys = ['maintenance_mode', 'noindex', 'page_counter_enabled', 'join_form_enabled', 'contact_form_enabled', 'crm_push_enabled', 'crm_sso_enabled'];
         foreach ($keys as $key) {
             $default = in_array($key, $booleanKeys, true) ? '0' : '';
             Setting::set($key, $r->input($key, $default));
@@ -76,6 +88,14 @@ class SettingsController extends Controller
         }
         if ($r->has('ai_glossary')) {
             Setting::set('ai_glossary', $r->input('ai_glossary', ''));
+        }
+
+        // CRM secrets — only update if provided (never clear an existing secret with empty)
+        if ($r->filled('crm_webhook_secret')) {
+            Setting::set('crm_webhook_secret', Crypt::encryptString($r->input('crm_webhook_secret')));
+        }
+        if ($r->filled('crm_sso_secret')) {
+            Setting::set('crm_sso_secret', Crypt::encryptString($r->input('crm_sso_secret')));
         }
 
         // WCAG AA contrast check

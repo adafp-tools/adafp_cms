@@ -79,6 +79,10 @@ class JoinController extends Controller
             Mail::to($notifyEmail)->send(new FormSubmissionNotification($submission));
         }
 
+        if (Setting::get('crm_push_enabled', '0') === '1') {
+            \App\Jobs\PushSubmissionToCrmJob::dispatch($submission);
+        }
+
         return back()->with('success', __('forms.success_join'));
     }
 }

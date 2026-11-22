@@ -56,7 +56,7 @@ Updated at the end of every phase.
 | 3 | Content model (4 languages) | Pending |
 | 4 | Public site, themes, performance | **Complete** |
 | 5 | Forms, sign-ups, data protection | **Complete** |
-| 6 | CRM link (SSO + write-only sign-ups) | Pending |
+| 6 | CRM link (SSO + write-only sign-ups) | **Complete** |
 | 7 | Packaging, releases, updates, backups | Pending |
 | 8 | Demo site at cms.adafp.org | Pending |
 | 9 | Hosted service on frepro.org | Pending |

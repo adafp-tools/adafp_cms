@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\AuthController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\HealthController;
+use App\Http\Controllers\Panel\SsoController;
 use App\Http\Controllers\Panel\SubmissionsController;
 use App\Http\Controllers\Panel\TwoFactorController;
 use App\Http\Controllers\Panel\UsersController;
@@ -38,6 +39,9 @@ Route::middleware(['web', \App\Http\Middleware\EnsureInstalled::class, \App\Http
             ->name('password.reset')->middleware('guest');
         Route::post('/reset-password', [\App\Http\Controllers\Panel\PasswordController::class, 'resetPassword'])
             ->name('password.update')->middleware('guest');
+
+        // SSO callback — authenticated by CRM-signed token, no Laravel auth required
+        Route::get('/sso', [SsoController::class, 'callback'])->name('sso');
 
         // Invitation acceptance (no auth required)
         Route::get('/invitation/{token}', [UsersController::class, 'acceptInvitation'])->name('invitation.accept');
