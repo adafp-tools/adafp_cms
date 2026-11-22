@@ -16,13 +16,15 @@ class ReleaseCommand extends Command
     protected $description = 'Build a release ZIP of the CMS (excluding dev files and secrets)';
 
     private array $excludeDirs = [
-        '.git', 'node_modules', 'vendor',
+        '.git', 'node_modules',
         'storage/app/public', 'storage/framework', 'storage/logs',
         'tests', '.claude',
     ];
 
+    // vendor/ is intentionally NOT excluded — production deps are bundled.
+    // .env.example IS included so the installer knows which vars to set.
     private array $excludeFiles = [
-        '.gitignore', '.env', '.env.example', 'CLAUDE.md',
+        '.gitignore', '.env', 'CLAUDE.md',
         'scripts/deploy.sh', 'scripts/provision-tenant.sh',
     ];
 
@@ -93,7 +95,19 @@ class ReleaseCommand extends Command
             $this->info('Assets built.');
         }
 
-        // 5. Build ZIP
+        // 5. Strip dev dependencies so vendor/ contains only production packages
+        $this->info('Installing production dependencies (composer --no-dev)...');
+        exec("cd $base && composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>&1", $compOut, $compCode);
+        if ($compCode !== 0) {
+            $this->error('composer install --no-dev FAILED.');
+            foreach ($compOut as $line) {
+                $this->line("  $line");
+            }
+            return self::FAILURE;
+        }
+        $this->info('Production dependencies ready.');
+
+        // 6. Build ZIP
         $date     = date('Ymd');
         $filename = "cms-{$version}-{$date}.zip";
         $relDir   = storage_path('releases');
@@ -114,7 +128,11 @@ class ReleaseCommand extends Command
 
         $this->info("Release ZIP built: storage/releases/$filename");
 
-        // 6. Retention — keep only 5 most recent
+        // 7. Restore dev dependencies for local development
+        $this->info('Restoring dev dependencies (composer install)...');
+        exec("cd $base && composer install --quiet 2>&1");
+
+        // 8. Retention — keep only 5 most recent
         $zips = glob("$relDir/cms-*.zip");
         if ($zips && count($zips) > 5) {
             sort($zips);
@@ -123,6 +141,7 @@ class ReleaseCommand extends Command
             }
         }
 
+        $this->info("Done. Upload storage/releases/$filename to the GitHub release.");
         return self::SUCCESS;
     }
 
