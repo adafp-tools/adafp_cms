@@ -45,6 +45,8 @@ Updated at the end of every phase.
 | 21 Nov 2026 | Phase 4 Lighthouse | Lighthouse mobile ≥90 performance, ≥95 accessibility must be verified locally on `cms.test` with both Classic and Campaign themes active — cannot be tested in cloud container. Run via Chrome DevTools or `npx lighthouse`. |
 | 21 Nov 2026 | LICENSE | Proprietary ADAFP draft — **pending Adil's legal review before first external release** |
 | 22 Nov 2026 | Phase 11 final check | 95/95 tests · neutrality zero · `npm run build` clean · no `env()` outside config/ · all code phases complete · deployment/provision/handover scripts committed |
+| 22 Nov 2026 | `cms:release` subprocess env | PHPUnit `<env>` tags use `force=false`; parent `.env` vars (`QUEUE_CONNECTION` etc.) leaked into child and caused `CrmPushTest` to fail in-process. Fixed by explicitly exporting `QUEUE_CONNECTION=sync CACHE_STORE=array SESSION_DRIVER=array DB_CONNECTION=sqlite DB_DATABASE=:memory:` in the `exec()` prefix in `ReleaseCommand`. |
+| 22 Nov 2026 | Release v0.1.0 | First release ZIP built: `cms-0.1.0-20261122.zip` (417 KB, 381 files). Deployment runbook: `docs/phase8-deploy-cms.adafp.org.md`. |
 
 ---
 
@@ -59,7 +61,7 @@ Updated at the end of every phase.
 | 5 | Forms, sign-ups, data protection | **Complete** |
 | 6 | CRM link (SSO + write-only sign-ups) | **Complete** |
 | 7 | Packaging, releases, updates, backups | **Complete** |
-| 8 | Demo site at cms.adafp.org | **Scripts ready — deploy manually** |
+| 8 | Demo site at cms.adafp.org | **Release ZIP built (v0.1.0, 22 Nov 2026) — deploy using `docs/phase8-deploy-cms.adafp.org.md`** |
 | 9 | Hosted service on frepro.org | **Scripts ready — provision manually** |
 | 10 | Pilot (Sudan National Trend Party) + handover | **Handover kit ready — pilot TBD** |
 | 11 | Final check | **Complete** |
