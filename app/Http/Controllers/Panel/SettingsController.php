@@ -45,7 +45,7 @@ class SettingsController extends Controller
     public function update(Request $r): RedirectResponse
     {
         $r->validate([
-            'theme'            => ['required', 'in:classic,campaign'],
+            'theme'            => ['required', 'in:classic'],
             'primary_color'    => ['required', 'regex:/^#[0-9a-fA-F]{6}$/'],
             'secondary_color'  => ['required', 'regex:/^#[0-9a-fA-F]{6}$/'],
             'text_on_primary'  => ['required', 'regex:/^#[0-9a-fA-F]{6}$/'],
