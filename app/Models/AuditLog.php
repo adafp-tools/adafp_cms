@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Request;
 class AuditLog extends Model
 {
     public $timestamps = false;
+    protected $casts = ['created_at' => 'datetime'];
     protected $fillable = [
         'user_id', 'user_name', 'action',
         'target_type', 'target_id', 'target_label',
