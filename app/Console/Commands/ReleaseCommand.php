@@ -62,7 +62,13 @@ class ReleaseCommand extends Command
         // 3. Run tests (skippable for CI pipelines that run tests separately)
         if (!$this->option('skip-tests')) {
             $this->info('Running tests...');
-            exec("cd $base && APP_ENV=testing php artisan test --stop-on-failure 2>&1", $testOut, $testCode);
+            $testEnv = 'APP_ENV=testing'
+                . ' QUEUE_CONNECTION=sync'
+                . ' CACHE_STORE=array'
+                . ' SESSION_DRIVER=array'
+                . ' DB_CONNECTION=sqlite'
+                . " DB_DATABASE=':memory:'";
+            exec("cd $base && $testEnv php artisan test --stop-on-failure 2>&1", $testOut, $testCode);
             if ($testCode !== 0) {
                 $this->error('Tests FAILED.');
                 foreach ($testOut as $line) {
