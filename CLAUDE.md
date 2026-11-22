@@ -44,6 +44,8 @@ Updated at the end of every phase.
 | 21 Nov 2026 | Packages | `laravel/fortify` (auth + 2FA), `intervention/image` (media resizing), `mews/purifier` (HTMLPurifier for rich text), `spatie/laravel-sitemap` (sitemap generation) |
 | 21 Nov 2026 | Phase 4 Lighthouse | Lighthouse mobile ≥90 performance, ≥95 accessibility must be verified locally on `cms.test` with both Classic and Campaign themes active — cannot be tested in cloud container. Run via Chrome DevTools or `npx lighthouse`. |
 | 21 Nov 2026 | LICENSE | Proprietary ADAFP draft — **pending Adil's legal review before first external release** |
+| 22 Nov 2026 | Phase 4 Lighthouse | Mobile Lighthouse run in cloud container (Chromium at `/opt/pw-browsers/chromium`, `php artisan serve` on localhost). All four passes (Classic/EN, Classic/AR, Campaign/EN, Campaign/AR): **Performance 100 · Accessibility 100 · Best-practices 100 · SEO 92**. SEO deduction: missing meta description on fresh install (no content) — not a code defect; score reaches 100 once party admin sets homepage description. Phase 4 targets (≥90 perf, ≥95 accessibility) **satisfied**. |
+| 22 Nov 2026 | Phase 1b Fonts | Inter and Playfair Display variable fonts placed in `public/fonts/`: `inter/InterVariable.woff2`, `inter/InterVariable-Italic.woff2`, `playfair/PlayfairDisplay-Variable.woff2`, `playfair/PlayfairDisplay-Italic-Variable.woff2`. Source: `@fontsource-variable` npm packages (OFL licence, Latin wght subset). No CDN. Font files committed to repo. Phase 1b **complete**. |
 | 22 Nov 2026 | Phase 11 final check | 95/95 tests · neutrality zero · `npm run build` clean · no `env()` outside config/ · all code phases complete · deployment/provision/handover scripts committed |
 | 22 Nov 2026 | `cms:release` subprocess env | PHPUnit `<env>` tags use `force=false`; parent `.env` vars (`QUEUE_CONNECTION` etc.) leaked into child and caused `CrmPushTest` to fail in-process. Fixed by explicitly exporting `QUEUE_CONNECTION=sync CACHE_STORE=array SESSION_DRIVER=array DB_CONNECTION=sqlite DB_DATABASE=:memory:` in the `exec()` prefix in `ReleaseCommand`. |
 | 22 Nov 2026 | Release v0.1.0 | First release ZIP built: `cms-0.1.0-20261122.zip` (417 KB, 381 files). Deployment runbook: `docs/phase8-deploy-cms.adafp.org.md`. |
@@ -54,7 +56,7 @@ Updated at the end of every phase.
 
 | Phase | Title | Status |
 |---|---|---|
-| 1 | GitHub org, repo, skeleton | **Complete** |
+| 1 | GitHub org, repo, skeleton | **Complete** (Phase 1b fonts: **Complete** 22 Nov 2026) |
 | 2 | Web installer and admin security | **Complete** |
 | 3 | Content model (4 languages) | **Complete** |
 | 4 | Public site, themes, performance | **Complete** |
