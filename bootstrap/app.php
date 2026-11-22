@@ -20,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Apply security headers to every response.
         $middleware->append(SecurityHeaders::class);
 
+        // Redirect unauthenticated panel users to the panel login, not the default /login.
+        $middleware->redirectGuestsTo(fn ($request) => route('panel.login'));
+
         // In demo mode, force noindex on every response.
         $middleware->append(DemoNoindex::class);
 
