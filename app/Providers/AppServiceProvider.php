@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Listeners\DemoMailFilter;
 use App\Models\Setting;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use Illuminate\Mail\Events\MessageSending;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(User::class, UserPolicy::class);
+
+        // In demo mode, filter outbound mail to the allow-list.
+        if (config('cms.instance') === 'demo') {
+            Event::listen(MessageSending::class, DemoMailFilter::class);
+        }
 
         // Hydrate cms.default_locale from the settings table so panel controllers
         // can read config('cms.default_locale') without hitting the DB themselves.

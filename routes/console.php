@@ -21,3 +21,8 @@ Schedule::command('cms:gdpr-erase')->monthly();
 
 // Automated weekly backup (database + media).
 Schedule::command('cms:backup')->weekly();
+
+// Demo mode: wipe and re-seed all content every night at midnight.
+if (config('cms.instance') === 'demo') {
+    Schedule::command('cms:demo-reset')->dailyAt('00:00');
+}
