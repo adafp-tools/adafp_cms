@@ -181,6 +181,10 @@ class ReleaseCommand extends Command
                 return true;
             }
         }
+        // Strip .git / .github directories anywhere in the tree (vendor sub-packages).
+        if ($item === '.git' || $item === '.github') {
+            return true;
+        }
         return false;
     }
 }
