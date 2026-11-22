@@ -44,7 +44,7 @@ class DemoSeeder extends Seeder
     {
         $settings = [
             'site_name'               => 'Progressive Citizens Party',
-            'theme'                   => 'campaign',
+            'theme'                   => 'classic',
             'primary_color'           => '#1a3f7a',
             'secondary_color'         => '#c8a84b',
             'text_on_primary'         => '#ffffff',

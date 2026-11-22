@@ -17,7 +17,7 @@
                 <dd class="text-blue-900">{{ $demoPassword }}</dd>
             </div>
         </dl>
-        <a href="/{{ $locale }}/{{ $panelPath }}"
+        <a href="/{{ $panelPath }}"
            class="mt-5 inline-block px-5 py-2 bg-[var(--color-primary)] text-[var(--color-text-on-primary)] rounded hover:opacity-90 font-medium text-sm focus:ring-2 focus:ring-[var(--color-primary)] focus:outline-none">
             {{ __('Open the admin panel') }}
         </a>
