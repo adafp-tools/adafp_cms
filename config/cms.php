@@ -71,6 +71,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Demo admin credentials
+    | Only used when CMS_INSTANCE=demo. Values come from .env only — never
+    | hardcode credentials here.
+    |--------------------------------------------------------------------------
+    */
+    'demo_admin_email'    => env('CMS_DEMO_ADMIN_EMAIL',    'demo@example.test'),
+    'demo_admin_password' => env('CMS_DEMO_ADMIN_PASSWORD', 'changeme'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo mail allow-list
     | Only used when CMS_INSTANCE=demo. All other mail is written to the log.
     |--------------------------------------------------------------------------
