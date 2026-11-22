@@ -80,6 +80,12 @@
                 📊 Analytics
             </a>
             @endif
+            @if(auth()->user()?->role === \App\Enums\UserRole::Owner)
+            <a href="{{ route('panel.backups.index') }}"
+               class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.backups*') ? 'bg-slate-700 text-white' : '' }}">
+                🗄 Backups
+            </a>
+            @endif
             @endcan
         </nav>
 

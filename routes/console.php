@@ -18,3 +18,6 @@ Schedule::call(function () {
 
 // GDPR erasure: hard-delete old form submissions, once a month.
 Schedule::command('cms:gdpr-erase')->monthly();
+
+// Automated weekly backup (database + media).
+Schedule::command('cms:backup')->weekly();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\AuthController;
+use App\Http\Controllers\Panel\BackupsController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\HealthController;
 use App\Http\Controllers\Panel\SsoController;
@@ -155,6 +156,14 @@ Route::middleware(['web', \App\Http\Middleware\EnsureInstalled::class, \App\Http
                     Route::post('/export',     [SubmissionsController::class, 'export'])->name('export');
                     Route::post('/{id}/read',  [SubmissionsController::class, 'markRead'])->name('read');
                     Route::post('/purge',      [SubmissionsController::class, 'purge'])->name('purge');
+                });
+
+                // Backups (Owner only — enforced inside controller)
+                Route::prefix('backups')->name('backups.')->group(function () {
+                    Route::get('/',                  [BackupsController::class, 'index'])->name('index');
+                    Route::get('/download/{file}',   [BackupsController::class, 'download'])->name('download');
+                    Route::delete('/{file}',         [BackupsController::class, 'destroy'])->name('destroy');
+                    Route::post('/run',              [BackupsController::class, 'run'])->name('run');
                 });
 
                 // Settings

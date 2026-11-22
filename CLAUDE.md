@@ -57,10 +57,10 @@ Updated at the end of every phase.
 | 4 | Public site, themes, performance | **Complete** |
 | 5 | Forms, sign-ups, data protection | **Complete** |
 | 6 | CRM link (SSO + write-only sign-ups) | **Complete** |
-| 7 | Packaging, releases, updates, backups | Pending |
-| 8 | Demo site at cms.adafp.org | Pending |
-| 9 | Hosted service on frepro.org | Pending |
-| 10 | Pilot (Sudan National Trend Party) + handover | Pending |
+| 7 | Packaging, releases, updates, backups | **Complete** |
+| 8 | Demo site at cms.adafp.org | **Scripts ready — deploy manually** |
+| 9 | Hosted service on frepro.org | **Scripts ready — provision manually** |
+| 10 | Pilot (Sudan National Trend Party) + handover | **Handover kit ready — pilot TBD** |
 | 11 | Final check | Pending |
 
 ---
