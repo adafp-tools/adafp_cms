@@ -36,7 +36,8 @@ trait ResolvesLocale
         $secondaryColor = (string) Setting::get('secondary_color', '#c0392b');
         $textOnPrimary  = (string) Setting::get('text_on_primary', '#ffffff');
         $logoPath       = (string) Setting::get('logo_path', '');
-        $noindex        = Setting::get('maintenance_mode', '0') === '1'
+        $noindex        = config('cms.instance') === 'demo'
+                          || Setting::get('maintenance_mode', '0') === '1'
                           || Setting::get('noindex', '0') === '1';
         $logoUrl = $logoPath ? config('app.url') . '/storage/' . $logoPath : null;
         $theme   = $this->currentTheme();

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="ltr">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('title', 'Dashboard') — {{ config('cms.product_name') }}</title>
+    <title>@yield('title', __('panel.dashboard')) — {{ config('cms.product_name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-slate-100 font-sans" x-data>
 
 @if(config('cms.instance') === 'demo')
 <div class="bg-amber-500 text-white text-center text-sm py-1 font-medium">
-    Demo installation — no real data, content resets nightly
+    {{ __('panel.demo_banner') }}
 </div>
 @endif
 
@@ -26,26 +26,26 @@
         <nav class="flex-1 py-4 space-y-0.5 px-2" aria-label="Admin navigation">
             <a href="{{ route('panel.dashboard') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.dashboard') ? 'bg-slate-700 text-white' : '' }}">
-                Dashboard
+                {{ __('panel.dashboard') }}
             </a>
 
             @can('publishContent', App\Models\User::class)
-            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Content</div>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Pages</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">News &amp; Posts</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Events</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">People</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Documents</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Gallery</a>
-            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">Menus</a>
+            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">{{ __('panel.nav_content') }}</div>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.pages') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.nav_news') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.events') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.people') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.documents') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.nav_gallery') }}</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700">{{ __('panel.menus') }}</a>
             @endcan
 
             @can('viewSubmissions', App\Models\User::class)
-            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Forms</div>
+            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">{{ __('panel.nav_forms') }}</div>
             @php $unreadCount = \App\Models\FormSubmission::unread()->count(); @endphp
             <a href="{{ route('panel.submissions.index') }}"
                class="flex items-center justify-between px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.submissions*') ? 'bg-slate-700 text-white' : '' }}">
-                <span>Submissions</span>
+                <span>{{ __('panel.submissions') }}</span>
                 @if($unreadCount > 0)
                     <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500 text-white text-xs font-bold">
                         {{ $unreadCount > 9 ? '9+' : $unreadCount }}
@@ -55,35 +55,35 @@
             @endcan
 
             @can('manageUsers', App\Models\User::class)
-            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Admin</div>
+            <div class="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">{{ __('panel.nav_admin') }}</div>
             <a href="{{ route('panel.users.index') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.users*') ? 'bg-slate-700 text-white' : '' }}">
-                Users
+                {{ __('panel.users') }}
             </a>
             @endcan
 
             @can('viewHealth', App\Models\User::class)
             <a href="{{ route('panel.health') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.health') ? 'bg-slate-700 text-white' : '' }}">
-                Health
+                {{ __('panel.health') }}
             </a>
             @endcan
 
             @can('manageSettings', App\Models\User::class)
             <a href="{{ route('panel.settings.index') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.settings*') ? 'bg-slate-700 text-white' : '' }}">
-                ⚙ Settings
+                ⚙ {{ __('panel.settings') }}
             </a>
             @if(\App\Models\Setting::get('page_counter_enabled', '0') === '1')
             <a href="{{ route('panel.analytics') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.analytics') ? 'bg-slate-700 text-white' : '' }}">
-                📊 Analytics
+                📊 {{ __('panel.analytics') }}
             </a>
             @endif
             @if(auth()->user()?->role === \App\Enums\UserRole::Owner)
             <a href="{{ route('panel.backups.index') }}"
                class="flex items-center gap-2 px-3 py-2 rounded text-sm hover:bg-slate-700 {{ request()->routeIs('panel.backups*') ? 'bg-slate-700 text-white' : '' }}">
-                🗄 Backups
+                🗄 {{ __('panel.backups') }}
             </a>
             @endif
             @endcan
@@ -98,10 +98,10 @@
     {{-- Main content --}}
     <div class="flex-1 flex flex-col overflow-hidden">
         <header class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between">
-            <h1 class="text-base font-semibold text-slate-800">@yield('title', 'Dashboard')</h1>
+            <h1 class="text-base font-semibold text-slate-800">@yield('title', __('panel.dashboard'))</h1>
             <form method="POST" action="{{ route('panel.logout') }}">
                 @csrf
-                <button type="submit" class="text-sm text-slate-500 hover:text-slate-800">Sign out</button>
+                <button type="submit" class="text-sm text-slate-500 hover:text-slate-800">{{ __('panel.sign_out') }}</button>
             </form>
         </header>
 

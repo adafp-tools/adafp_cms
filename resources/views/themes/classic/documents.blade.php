@@ -1,10 +1,10 @@
 @extends($layout)
 @section('content')
     <section class="max-w-4xl mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold mb-8">Documents</h1>
+        <h1 class="text-3xl font-bold mb-8">{{ __('Documents') }}</h1>
 
         @if($documents->isEmpty())
-            <p class="text-gray-500">No documents published yet.</p>
+            <p class="text-gray-500">{{ __('No documents published yet.') }}</p>
         @else
             <ul class="space-y-4 list-none p-0">
                 @foreach($documents as $doc)
@@ -27,8 +27,8 @@
                            class="shrink-0 px-4 py-2 bg-[var(--color-primary)] text-[var(--color-text-on-primary)] rounded text-sm
                                   font-medium hover:opacity-90 focus:ring-2 focus:ring-gray-400 focus:outline-none"
                            download
-                           aria-label="Download {{ $dt?->title ?? $doc->file }}">
-                            Download
+                           aria-label="{{ __('Download :title', ['title' => $dt?->title ?? $doc->file]) }}">
+                            {{ __('Download') }}
                         </a>
                     </li>
                 @endforeach

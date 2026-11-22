@@ -70,4 +70,14 @@ return [
         explode(',', env('CMS_DEMO_MAIL_ALLOWLIST', ''))
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Demo admin credentials
+    | Only used by DemoSeeder when CMS_INSTANCE=demo.
+    | Leave demo_admin_password blank to skip creating the demo user account.
+    |--------------------------------------------------------------------------
+    */
+    'demo_login_email'    => env('CMS_DEMO_LOGIN_EMAIL', 'demo@example.org'),
+    'demo_login_password' => env('CMS_DEMO_LOGIN_PASSWORD', ''),
+
 ];

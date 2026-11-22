@@ -8,7 +8,7 @@
         @endif
 
         @if($gallery->images->isEmpty())
-            <p class="text-gray-500">No images in this gallery.</p>
+            <p class="text-gray-500">{{ __('No images in this gallery.') }}</p>
         @else
             <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 list-none p-0">
                 @foreach($gallery->images as $image)

@@ -10,8 +10,8 @@
 <body class="min-h-screen bg-gray-50 flex items-center justify-center font-sans">
     <div class="text-center max-w-md px-6">
         <div class="text-6xl mb-6" aria-hidden="true">🔧</div>
-        <h1 class="text-2xl font-bold text-gray-800 mb-2">Under Maintenance</h1>
-        <p class="text-gray-600">This site is temporarily unavailable while we make improvements. Please check back soon.</p>
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ __('Under Maintenance') }}</h1>
+        <p class="text-gray-600">{{ __('This site is temporarily unavailable while we make improvements. Please check back soon.') }}</p>
     </div>
 </body>
 </html>

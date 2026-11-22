@@ -59,7 +59,10 @@ Route::middleware(['web', \App\Http\Middleware\EnsureInstalled::class, \App\Http
             Route::post('/two-factor/challenge', [TwoFactorController::class, 'verifyChallenge'])->name('two-factor.challenge.verify');
 
             // Fully authenticated + 2FA-enforced zone
-            Route::middleware(\App\Http\Middleware\RequireTwoFactor::class)->group(function () {
+            Route::middleware([
+                \App\Http\Middleware\RequireTwoFactor::class,
+                \App\Http\Middleware\DemoGuard::class,
+            ])->group(function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
                 // Health (owner + admin)

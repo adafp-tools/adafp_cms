@@ -1,19 +1,19 @@
 @extends('panel.layout')
-@section('title', 'Analytics')
+@section('title', __('panel.analytics'))
 
 @section('content')
 <div class="max-w-3xl">
-    <p class="text-sm text-slate-500 mb-6">Total page views: <strong>{{ number_format($totalViews) }}</strong></p>
+    <p class="text-sm text-slate-500 mb-6">{{ __('panel.total_views') }} <strong>{{ number_format($totalViews) }}</strong></p>
 
     @if($topPages->isEmpty())
-        <p class="text-slate-500">No data yet. Enable the page counter in <a href="{{ route('panel.settings.index') }}" class="underline">Settings</a> to start collecting views.</p>
+        <p class="text-slate-500">{{ __('panel.no_analytics') }} <a href="{{ route('panel.settings.index') }}" class="underline">{{ __('panel.settings') }}</a> {{ __('panel.no_analytics_suffix') }}</p>
     @else
         <div class="bg-white rounded-lg border border-slate-200 overflow-hidden">
             <table class="w-full text-sm">
                 <thead class="bg-slate-50 border-b border-slate-200">
                     <tr>
-                        <th class="text-start px-4 py-3 font-medium text-slate-600">Path</th>
-                        <th class="text-end px-4 py-3 font-medium text-slate-600">Views</th>
+                        <th class="text-start px-4 py-3 font-medium text-slate-600">{{ __('panel.path') }}</th>
+                        <th class="text-end px-4 py-3 font-medium text-slate-600">{{ __('panel.views') }}</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // General
+    // ── General ──────────────────────────────────────────────────────────────
     'save'           => 'Save',
     'cancel'         => 'Cancel',
     'edit'           => 'Edit',
@@ -14,7 +14,7 @@ return [
     'choose_media'   => 'Choose image',
     'select_media'   => 'Select from media library',
 
-    // Fields
+    // ── Fields ───────────────────────────────────────────────────────────────
     'title'            => 'Title',
     'slug'             => 'Slug',
     'slug_auto'        => 'Auto-generated from title',
@@ -32,7 +32,7 @@ return [
     'meta_description' => 'Meta description (max 160 chars)',
     'starts_at'        => 'Start date/time',
     'ends_at'          => 'End date/time',
-    'location'         => 'Location (address)',
+    'location'         => 'Location',
     'location_label'   => 'Location label (translated)',
     'online_url'       => 'Online event URL',
     'description'      => 'Description',
@@ -51,27 +51,26 @@ return [
     'current_file'     => 'Current file',
     'images'           => 'Images',
     'add_images'       => 'Add images from media library',
-    'location_label'   => 'Location label',
+    'menu_location'    => 'Menu location',
     'menu_items_json'  => 'Menu items (JSON)',
     'menu_items_hint'  => 'Array of objects with keys: label, url, target (_self or _blank), children (optional array).',
-    'location'         => 'Menu location',
 
-    // Media
+    // ── Media ────────────────────────────────────────────────────────────────
     'media_library'  => 'Media library',
     'media_uploaded' => 'File uploaded successfully.',
     'media_deleted'  => 'File deleted.',
     'no_media'       => 'No files uploaded yet.',
 
-    // Pages
-    'pages'       => 'Pages',
-    'add_page'    => 'Add page',
-    'edit_page'   => 'Edit page',
+    // ── Pages ────────────────────────────────────────────────────────────────
+    'pages'        => 'Pages',
+    'add_page'     => 'Add page',
+    'edit_page'    => 'Edit page',
     'page_created' => 'Page created.',
     'page_updated' => 'Page updated.',
     'page_deleted' => 'Page deleted.',
-    'no_pages'    => 'No pages yet.',
+    'no_pages'     => 'No pages yet.',
 
-    // Posts
+    // ── Posts ────────────────────────────────────────────────────────────────
     'posts'        => 'Posts',
     'add_post'     => 'Add post',
     'edit_post'    => 'Edit post',
@@ -80,7 +79,7 @@ return [
     'post_deleted' => 'Post deleted.',
     'no_posts'     => 'No posts yet.',
 
-    // Events
+    // ── Events ───────────────────────────────────────────────────────────────
     'events'        => 'Events',
     'add_event'     => 'Add event',
     'edit_event'    => 'Edit event',
@@ -89,7 +88,7 @@ return [
     'event_deleted' => 'Event deleted.',
     'no_events'     => 'No events yet.',
 
-    // People
+    // ── People ───────────────────────────────────────────────────────────────
     'people'         => 'People',
     'add_person'     => 'Add person',
     'edit_person'    => 'Edit person',
@@ -98,7 +97,7 @@ return [
     'person_deleted' => 'Person deleted.',
     'no_people'      => 'No people yet.',
 
-    // Documents
+    // ── Documents ────────────────────────────────────────────────────────────
     'documents'        => 'Documents',
     'add_document'     => 'Add document',
     'edit_document'    => 'Edit document',
@@ -107,50 +106,193 @@ return [
     'document_deleted' => 'Document deleted.',
     'no_documents'     => 'No documents yet.',
 
-    // Galleries
-    'galleries'        => 'Galleries',
-    'add_gallery'      => 'Add gallery',
-    'edit_gallery'     => 'Edit gallery',
-    'gallery_created'  => 'Gallery created.',
-    'gallery_updated'  => 'Gallery updated.',
-    'gallery_deleted'  => 'Gallery deleted.',
-    'no_galleries'     => 'No galleries yet.',
+    // ── Galleries ────────────────────────────────────────────────────────────
+    'galleries'       => 'Galleries',
+    'add_gallery'     => 'Add gallery',
+    'edit_gallery'    => 'Edit gallery',
+    'gallery_created' => 'Gallery created.',
+    'gallery_updated' => 'Gallery updated.',
+    'gallery_deleted' => 'Gallery deleted.',
+    'no_galleries'    => 'No galleries yet.',
 
-    // Menus
+    // ── Menus ────────────────────────────────────────────────────────────────
     'menus'        => 'Menus',
     'edit_menu'    => 'Edit menu',
     'menu_updated' => 'Menu saved.',
     'no_menus'     => 'No menus configured.',
 
-    // AI
+    // ── AI ───────────────────────────────────────────────────────────────────
     'ai_translate' => 'Translate with AI',
 
-    // Submissions
-    'submissions'          => 'Submissions',
-    'submission_detail'    => 'Submission detail',
-    'back_to_submissions'  => 'Back to submissions',
-    'all_types'            => 'All types',
-    'all_statuses'         => 'All statuses',
-    'contact'              => 'Contact',
-    'join'                 => 'Join',
-    'unread'               => 'Unread',
-    'read'                 => 'Read',
-    'type'                 => 'Type',
-    'name'                 => 'Name',
-    'email'                => 'Email',
-    'locale'               => 'Locale',
-    'received'             => 'Received',
-    'status'               => 'Status',
-    'view'                 => 'View',
-    'delete'               => 'Delete',
-    'delete_confirm'       => 'Delete this submission? This action can be undone by an admin.',
-    'purge_confirm'        => 'Permanently delete all soft-deleted submissions older than 90 days?',
-    'no_submissions'       => 'No submissions found.',
-    'mark_read'            => 'Mark as read',
-    'export_csv'           => 'Export CSV',
-    'purge_deleted'        => 'Purge old deleted',
-    'submission_deleted'   => 'Submission deleted.',
+    // ── Submissions ──────────────────────────────────────────────────────────
+    'submissions'            => 'Submissions',
+    'submission_detail'      => 'Submission detail',
+    'back_to_submissions'    => 'Back to submissions',
+    'all_types'              => 'All types',
+    'all_statuses'           => 'All statuses',
+    'contact'                => 'Contact',
+    'join'                   => 'Join',
+    'unread'                 => 'Unread',
+    'read'                   => 'Read',
+    'locale'                 => 'Locale',
+    'received'               => 'Received',
+    'view'                   => 'View',
+    'delete_confirm'         => 'Delete this submission? This action can be undone by an admin.',
+    'purge_confirm'          => 'Permanently delete all soft-deleted submissions older than 90 days?',
+    'no_submissions'         => 'No submissions found.',
+    'mark_read'              => 'Mark as read',
+    'export_csv'             => 'Export CSV',
+    'purge_deleted'          => 'Purge old deleted',
+    'submission_deleted'     => 'Submission deleted.',
     'submission_marked_read' => 'Marked as read.',
-    'submission_purged'    => ':count submission(s) permanently deleted.',
-    'consent_at'           => 'Consent given at',
+    'submission_purged'      => ':count submission(s) permanently deleted.',
+    'consent_at'             => 'Consent given at',
+
+    // ── Layout / Navigation ──────────────────────────────────────────────────
+    'demo_banner'   => 'Demo installation — no real data, content resets nightly',
+    'dashboard'     => 'Dashboard',
+    'nav_content'   => 'Content',
+    'nav_news'      => 'News & Posts',
+    'nav_gallery'   => 'Gallery',
+    'nav_forms'     => 'Forms',
+    'nav_admin'     => 'Admin',
+    'users'         => 'Users',
+    'health'        => 'Health',
+    'settings'      => 'Settings',
+    'analytics'     => 'Analytics',
+    'backups'       => 'Backups',
+    'sign_out'      => 'Sign out',
+
+    // ── Dashboard ────────────────────────────────────────────────────────────
+    'version'         => 'Version',
+    'site'            => 'Site',
+    'your_role'       => 'Your role',
+    'recent_activity' => 'Recent activity',
+    'no_activity'     => 'No activity yet.',
+
+    // ── Users ────────────────────────────────────────────────────────────────
+    'team_members'       => 'Team members',
+    'role'               => 'Role',
+    'two_factor'         => '2FA',
+    'last_active'        => 'Last active',
+    'you'                => 'you',
+    'two_factor_on'      => 'On',
+    'two_factor_required' => 'Required — not set',
+    'two_factor_off'     => 'Off',
+    'never'              => 'Never',
+    'pending_invitations' => 'Pending invitations',
+    'expires'            => 'expires',
+    'invite_new_member'  => 'Invite a new team member',
+    'role_admin'         => 'Admin',
+    'role_editor'        => 'Editor',
+    'role_translator'    => 'Translator',
+    'send_invitation'    => 'Send invitation',
+    'remove_user_confirm' => 'Remove :name?',
+
+    // ── Auth ─────────────────────────────────────────────────────────────────
+    'sign_in'                   => 'Sign in',
+    'admin_panel'               => 'Admin panel',
+    'password'                  => 'Password',
+    'forgot_password'           => 'Forgot password?',
+    'reset_password_heading'    => 'Reset your password',
+    'reset_password_desc'       => "Enter your email and we'll send a reset link.",
+    'send_reset_link'           => 'Send reset link',
+    'back_to_sign_in'           => 'Back to sign in',
+    'set_new_password'          => 'Set a new password',
+    'new_password'              => 'New password (min 12 chars)',
+    'confirm_password'          => 'Confirm password',
+    'reset_password'            => 'Reset password',
+    'two_factor_heading'        => 'Two-factor verification',
+    'two_factor_challenge_desc' => 'Enter the 6-digit code from your authenticator app, or a recovery code.',
+    'code'                      => 'Code',
+    'verify'                    => 'Verify',
+    'two_factor_setup_heading'  => 'Set up two-factor authentication',
+    'two_factor_setup_desc'     => 'Your role requires 2FA. Scan the QR code with an authenticator app (Google Authenticator, Aegis, etc.), then enter the 6-digit code to confirm.',
+    'cant_scan'                 => "Can't scan? Enter key manually",
+    'verification_code'         => 'Verification code',
+    'confirm_activate'          => 'Confirm and activate',
+    'save_recovery_codes'       => 'Save your recovery codes.',
+    'recovery_codes_desc'       => 'If you lose access to your authenticator, these are the only way to regain entry. Store them in a safe place.',
+    'create_your_account'       => 'Create your account',
+    'invited_as'                => "You've been invited as :role for :site.",
+    'your_full_name'            => 'Your full name',
+    'password_min'              => 'Password (min 12 chars)',
+    'create_account'            => 'Create account',
+
+    // ── Settings ─────────────────────────────────────────────────────────────
+    'site_logo'          => 'Site Logo',
+    'site_name'          => 'Site name',
+    'theme'              => 'Theme',
+    'primary_colour'     => 'Primary colour',
+    'secondary_colour'   => 'Secondary colour',
+    'text_on_primary'    => 'Text on primary',
+    'default_locale'     => 'Default locale',
+    'active_locales'     => 'Active locales',
+    'maintenance_mode'   => 'Maintenance mode',
+    'noindex'            => 'Block search engines (noindex)',
+    'page_counter'       => 'Page counter',
+    'forms_notifications' => 'Forms & notifications',
+    'enable_contact_form' => 'Enable contact form',
+    'enable_join_form'   => 'Enable join/membership form',
+    'notification_email' => 'Notification email',
+    'from_name'          => 'From name',
+    'from_email'         => 'From email',
+    'privacy_policy_url' => 'Privacy policy URL',
+    'ai_translation'     => 'AI Translation settings',
+    'anthropic_key'      => 'Anthropic API key',
+    'ai_glossary'        => 'Translation glossary',
+    'crm_integration'    => 'CRM integration (optional)',
+    'crm_push_enabled'   => 'Enable write-only push to CRM on join submissions',
+    'crm_webhook_url'    => 'CRM webhook URL',
+    'crm_webhook_secret' => 'CRM webhook secret',
+    'crm_sso_enabled'    => 'Enable SSO login from CRM',
+    'crm_sso_secret'     => 'CRM SSO secret',
+    'save_settings'           => 'Save settings',
+    'secret_set'              => 'Secret is set. Leave blank to keep existing.',
+    'notification_email_hint' => 'Submissions sent here — leave blank to disable',
+    'api_key_hint'            => 'Leave blank to keep existing key',
+    'api_key_note'            => 'Stored encrypted. Never logged or displayed.',
+    'glossary_placeholder'    => 'One term per line: English term = translated term',
+    'enter_secret_hint'       => 'Enter secret to set or update',
+
+    // ── Backups ──────────────────────────────────────────────────────────────
+    'run_backup'           => 'Run backup now',
+    'no_backups'           => 'No backups yet. Click "Run backup now" to create the first one.',
+    'size'                 => 'Size',
+    'date'                 => 'Date',
+    'actions'              => 'Actions',
+    'download'             => 'Download',
+    'delete_backup_confirm' => 'Delete this backup file?',
+
+    // ── Health ───────────────────────────────────────────────────────────────
+    'system'           => 'System',
+    'cms_version'      => 'CMS version',
+    'instance'         => 'Instance',
+    'php'              => 'PHP',
+    'database'         => 'Database',
+    'disk_free'        => 'Disk free',
+    'last_backup'      => 'Last backup',
+    'cron_last_run'    => 'Cron last run',
+    'queue_backlog'    => 'Queue backlog',
+    'jobs'             => 'jobs',
+    'sensitive_exposure' => 'Sensitive file exposure',
+    'all_pass'         => 'All pass',
+    'issues_found'     => 'Issues found',
+    'storage'          => 'Storage',
+    'storage_writable' => 'storage/app/ writable',
+    'mail'             => 'Mail',
+    'send_test_email'  => 'Send test email to :email',
+    'not_recorded'     => 'Not recorded',
+
+    // ── Analytics ────────────────────────────────────────────────────────────
+    'total_views'       => 'Total page views:',
+    'no_analytics'      => 'No data yet. Enable the page counter in',
+    'no_analytics_suffix' => 'to start collecting views.',
+    'path'              => 'Path',
+    'views'             => 'Views',
+
+// ── Demo mode ─────────────────────────────────────────────────────────────
+    'demo_blocked'           => 'This action is not available in the demo.',
+    'demo_credentials_title' => 'Demo credentials — try the admin panel',
+    'demo_credentials_fill'  => 'Fill in',
 ];

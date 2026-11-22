@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'contact_title'  => 'Contacte-nos',
+    'join_title'     => 'Junte-se a nós',
+    'name'           => 'Nome',
+    'email'          => 'E-mail',
+    'phone'          => 'Telefone',
+    'subject'        => 'Assunto',
+    'message'        => 'Mensagem',
+    'dob'            => 'Data de nascimento',
+    'address'        => 'Morada',
+    'party_role'     => 'Papel solicitado',
+    'role_member'    => 'Membro',
+    'role_volunteer' => 'Voluntário',
+    'role_candidate' => 'Candidato',
+    'consent_label'  => 'Concordo que os meus dados sejam tratados de acordo com a política de privacidade',
+    'privacy_policy' => 'Política de privacidade',
+    'submit_contact' => 'Enviar mensagem',
+    'submit_join'    => 'Enviar pedido',
+    'success_contact' => 'A sua mensagem foi enviada.',
+    'success_join'   => 'O seu pedido foi recebido.',
+    'form_disabled'  => 'Este formulário está atualmente desativado.',
+    'rate_limited'   => 'Demasiadas tentativas. Por favor, tente mais tarde.',
+    'demo_form_notice' => 'Este é um site de demonstração. Nada do que introduziu foi guardado ou enviado.',
+];

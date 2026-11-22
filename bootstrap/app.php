@@ -30,12 +30,14 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Named middleware aliases
         $middleware->alias([
-            'installed'     => \App\Http\Middleware\EnsureInstalled::class,
-            'not.installed' => \App\Http\Middleware\EnsureNotInstalled::class,
-            'require.2fa'   => \App\Http\Middleware\RequireTwoFactor::class,
-            'panel.noindex' => \App\Http\Middleware\PanelNoindex::class,
-            'locale'        => \App\Http\Middleware\LocaleMiddleware::class,
-            'page.cache'    => \App\Http\Middleware\PublicPageCache::class,
+            'installed'      => \App\Http\Middleware\EnsureInstalled::class,
+            'not.installed'  => \App\Http\Middleware\EnsureNotInstalled::class,
+            'require.2fa'    => \App\Http\Middleware\RequireTwoFactor::class,
+            'panel.noindex'  => \App\Http\Middleware\PanelNoindex::class,
+            'locale'         => \App\Http\Middleware\LocaleMiddleware::class,
+            'page.cache'     => \App\Http\Middleware\PublicPageCache::class,
+            'demo.guard'     => \App\Http\Middleware\DemoGuard::class,
+            'demo.noindex'   => \App\Http\Middleware\DemoNoIndex::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

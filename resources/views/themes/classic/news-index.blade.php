@@ -1,10 +1,10 @@
 @extends($layout)
 @section('content')
     <section class="max-w-6xl mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold mb-8">News</h1>
+        <h1 class="text-3xl font-bold mb-8">{{ __('News') }}</h1>
 
         @if($posts->isEmpty())
-            <p class="text-gray-500">No posts published yet.</p>
+            <p class="text-gray-500">{{ __('No posts published yet.') }}</p>
         @else
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($posts as $post)

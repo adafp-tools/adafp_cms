@@ -91,6 +91,26 @@ Self-hosted in `public/fonts/`:
 
 ---
 
+## Translation architecture (Phase 1 — i18n)
+
+### How locale routing works
+- Public routes use a `{locale}` prefix; `LocaleMiddleware` calls `App::setLocale($locale)`.
+- The admin panel has **no locale middleware** and renders in the app's default locale (`config('app.locale')`, typically `en`). There is no per-user locale column.
+- The installer also has no locale middleware; it always renders in the app default.
+- **Consequence**: `lang/fr/panel.php`, `lang/pt/panel.php`, and `lang/ar/panel.php` are ready for future use but are NOT auto-activated until a locale-switching mechanism is added to the panel (e.g. user profile setting or query string). Do not remove them — they are required for future panel i18n.
+
+### Translation file types
+| File pattern | Used for | Mechanism |
+|---|---|---|
+| `lang/{locale}/panel.php` | Panel, auth, installer UI | `__('panel.key')` |
+| `lang/{locale}/forms.php` | Public form labels | `__('forms.key')` |
+| `lang/{locale}.json` | Theme views, installer, emails | `__('English text as key')` |
+
+### Coverage test
+`tests/Unit/TranslationCoverageTest.php` verifies that every key in `en/panel.php`, `en/forms.php`, and `fr.json` exists in every other locale. Run it with `php artisan test --filter=TranslationCoverageTest`.
+
+---
+
 ## Neutrality check command
 
 Run before every release ZIP is built:

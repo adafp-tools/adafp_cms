@@ -16,7 +16,7 @@ class ReleaseCommand extends Command
     protected $description = 'Build a release ZIP of the CMS (excluding dev files and secrets)';
 
     private array $excludeDirs = [
-        '.git', 'node_modules', 'vendor',
+        '.git', 'node_modules',
         'storage/app/public', 'storage/framework', 'storage/logs',
         'tests', '.claude',
     ];

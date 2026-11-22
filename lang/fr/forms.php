@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'contact_title'  => 'Nous contacter',
+    'join_title'     => 'Nous rejoindre',
+    'name'           => 'Nom',
+    'email'          => 'E-mail',
+    'phone'          => 'Téléphone',
+    'subject'        => 'Objet',
+    'message'        => 'Message',
+    'dob'            => 'Date de naissance',
+    'address'        => 'Adresse',
+    'party_role'     => 'Rôle demandé',
+    'role_member'    => 'Membre',
+    'role_volunteer' => 'Bénévole',
+    'role_candidate' => 'Candidat',
+    'consent_label'  => 'J\'accepte que mes données soient traitées conformément à la politique de confidentialité',
+    'privacy_policy' => 'Politique de confidentialité',
+    'submit_contact' => 'Envoyer le message',
+    'submit_join'    => 'Envoyer la demande',
+    'success_contact' => 'Votre message a été envoyé.',
+    'success_join'   => 'Votre demande a été reçue.',
+    'form_disabled'  => 'Ce formulaire est actuellement désactivé.',
+    'rate_limited'   => 'Trop de tentatives. Veuillez réessayer plus tard.',
+    'demo_form_notice' => 'Ceci est un site de démonstration. Rien de ce que vous avez saisi n\'a été enregistré ni envoyé.',
+];

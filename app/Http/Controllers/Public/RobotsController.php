@@ -10,7 +10,8 @@ class RobotsController extends Controller
 {
     public function index(): Response
     {
-        $noindex = Setting::get('maintenance_mode', '0') === '1'
+        $noindex = config('cms.instance') === 'demo'
+                || Setting::get('maintenance_mode', '0') === '1'
                 || Setting::get('noindex', '0') === '1';
 
         $content = $noindex

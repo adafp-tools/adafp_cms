@@ -1,10 +1,10 @@
 @extends($layout)
 @section('content')
     <section class="max-w-4xl mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold mb-8">Upcoming Events</h1>
+        <h1 class="text-3xl font-bold mb-8">{{ __('Upcoming Events') }}</h1>
 
         @if($events->isEmpty())
-            <p class="text-gray-500">No upcoming events.</p>
+            <p class="text-gray-500">{{ __('No upcoming events.') }}</p>
         @else
             <ul class="space-y-6 list-none p-0">
                 @foreach($events as $event)

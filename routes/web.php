@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\DemoPageController;
 use App\Http\Controllers\Public\DocumentsController;
 use App\Http\Controllers\Public\EventController;
 use App\Http\Controllers\Public\FeedController;
@@ -27,7 +28,7 @@ Route::get('/feed.xml', [FeedController::class, 'index'])->name('public.feed');
 // Locale-prefixed public routes
 Route::prefix('{locale}')
     ->where(['locale' => implode('|', config('cms.supported_locales', ['en', 'fr', 'pt', 'ar']))])
-    ->middleware([LocaleMiddleware::class, PublicPageCache::class])
+    ->middleware([LocaleMiddleware::class, PublicPageCache::class, \App\Http\Middleware\DemoNoIndex::class])
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('public.home');
         Route::get('/news', [PostController::class, 'index'])->name('public.news.index');
@@ -41,6 +42,11 @@ Route::prefix('{locale}')
         Route::post('/contact', [ContactController::class, 'submit'])->name('public.contact.submit');
         Route::get('/join',     [JoinController::class, 'show'])->name('public.join');
         Route::post('/join',    [JoinController::class, 'submit'])->name('public.join.submit');
+        // Demo information page — registered before the catch-all slug route, demo instances only.
+        if (config('cms.instance') === 'demo') {
+            Route::get('/demo', [DemoPageController::class, 'index'])->name('public.demo');
+        }
+
         // Generic page slug last (catch-all within locale)
         Route::get('/{slug}', [PageController::class, 'show'])->name('public.page.show');
     });

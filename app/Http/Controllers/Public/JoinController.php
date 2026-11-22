@@ -61,6 +61,11 @@ class JoinController extends Controller
             'consent'    => ['required', 'accepted'],
         ]);
 
+        // Demo: validate but do not store or email.
+        if (config('cms.instance') === 'demo') {
+            return back()->with('success', __('forms.demo_form_notice'));
+        }
+
         $submission = FormSubmission::create([
             'form_type'  => 'join',
             'locale'     => $locale,

@@ -33,12 +33,12 @@
 
 @if(config('cms.instance') === 'demo')
     <div class="bg-yellow-400 text-center text-sm py-1 font-medium text-gray-900">
-        Demo site — not real party data
+        {{ __('Demo site — not real party data') }}
     </div>
 @endif
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 bg-white px-4 py-2 rounded shadow z-50">
-    Skip to content
+    {{ __('Skip to content') }}
 </a>
 
 <header class="bg-[var(--color-primary)] text-[var(--color-text-on-primary)]">
@@ -102,6 +102,14 @@
                     @endforeach
                 </ul>
             </nav>
+        @endif
+        @if(config('cms.instance') === 'demo')
+            <p class="mt-4">
+                <a href="/{{ $locale }}/demo"
+                   class="underline hover:no-underline focus:ring-2 focus:ring-gray-400 focus:outline-none rounded">
+                    {{ __('Try the admin panel (demo)') }}
+                </a>
+            </p>
         @endif
     </div>
 </footer>
