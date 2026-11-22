@@ -62,6 +62,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default locale
+    |--------------------------------------------------------------------------
+    | Seeded at runtime from the settings table by AppServiceProvider::boot().
+    | Falls back to 'en' before the DB is available (config load, CLI, tests).
+    */
+    'default_locale' => 'en',
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo mail allow-list
     | Only used when CMS_INSTANCE=demo. All other mail is written to the log.
     |--------------------------------------------------------------------------

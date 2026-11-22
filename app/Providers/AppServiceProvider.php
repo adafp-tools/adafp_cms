@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -24,5 +25,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(User::class, UserPolicy::class);
+
+        // Hydrate cms.default_locale from the settings table so panel controllers
+        // can read config('cms.default_locale') without hitting the DB themselves.
+        // Skipped when the DB isn't ready (installer, unit tests with no DB).
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
+                config(['cms.default_locale' => Setting::get('default_locale', 'en')]);
+            }
+        } catch (\Throwable) {
+            // DB not available — config key keeps its static default ('en').
+        }
     }
 }
