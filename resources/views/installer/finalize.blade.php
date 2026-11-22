@@ -20,8 +20,7 @@
                 <span class="font-medium text-slate-700">{{ __('Storage symlink') }}</span>
                 @unless($storageOk)
                     <p class="text-sm text-amber-700 mt-1">
-                        The <code>/storage/</code> symlink is not accessible over HTTP. This can happen on some Apache configurations.<br>
-                        Uploaded files will be served through a PHP route instead — this works but is slightly slower. No action needed.
+                        {{ __('The /storage/ symlink is not accessible over HTTP. This can happen on some Apache configurations. Uploaded files will be served through a PHP route instead — this works but is slightly slower. No action needed.') }}
                     </p>
                 @endunless
             </div>
@@ -43,10 +42,7 @@
             </ul>
             @unless($exposurePassed)
             <div class="ms-6 mt-2 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm">
-                <strong>Action required:</strong> Some sensitive files are reachable over HTTP.
-                Ensure your document root points to <code>public/</code>, or that your <code>.htaccess</code>
-                rules deny access to files outside <code>public/</code>. Installation cannot complete until these pass.
-                Fix your hosting configuration, then <a href="{{ route('installer.finalize') }}" class="underline">retry</a>.
+                {!! __('Action required: Some sensitive files are reachable over HTTP. Ensure your document root points to <code>public/</code>, or that your <code>.htaccess</code> rules deny access to files outside <code>public/</code>. Installation cannot complete until these pass. Fix your hosting configuration, then <a href=":url" class="underline">retry</a>.', ['url' => route('installer.finalize')]) !!}
             </div>
             @endunless
         </li>

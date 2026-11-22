@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DemoNoindex;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Apply security headers to every response.
         $middleware->append(SecurityHeaders::class);
+
+        // In demo mode, force noindex on every response.
+        $middleware->append(DemoNoindex::class);
+
+        // In demo mode, block account-mutation routes (Fortify + panel).
+        $middleware->appendToGroup('web', \App\Http\Middleware\DemoGuard::class);
 
         // Ensure EnsureInstalled runs before Authenticate in the priority sort.
         // Laravel's priority sort moves Authenticate before SubstituteBindings (from the

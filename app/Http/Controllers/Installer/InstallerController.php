@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ExposureTestService;
 use App\Services\InstallerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class InstallerController extends Controller
@@ -19,6 +20,13 @@ class InstallerController extends Controller
     public function index()
     {
         return redirect()->route('installer.requirements');
+    }
+
+    public function setLang(string $locale)
+    {
+        session(['installer_lang' => $locale]);
+        App::setLocale($locale);
+        return redirect()->back()->fallback(route('installer.requirements'));
     }
 
     // Step 1: requirements
@@ -155,7 +163,8 @@ class InstallerController extends Controller
 
         // Store active locales in settings
         if ($migrated && $user) {
-            \App\Models\Setting::set('active_locales', json_encode($site['active_locales']));
+            \App\Models\Setting::set('active_locales', implode(',', $site['active_locales']));
+            \App\Models\Setting::set('default_locale', $site['default_locale']);
             \App\Models\Setting::set('org_name', $site['org_name']);
         }
 

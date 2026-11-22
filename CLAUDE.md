@@ -64,7 +64,7 @@ Updated at the end of every phase.
 | 5 | Forms, sign-ups, data protection | **Complete** |
 | 6 | CRM link (SSO + write-only sign-ups) | **Complete** |
 | 7 | Packaging, releases, updates, backups | **Complete** |
-| 8 | Demo site at cms.adafp.org | **Release ZIP built (v0.1.0, 22 Nov 2026) — deploy using `docs/phase8-deploy-cms.adafp.org.md`** |
+| 8 | Demo site at cms.adafp.org | **Release ZIP built (v0.2.0, 22 Nov 2026) — deploy using `docs/phase8-deploy-cms.adafp.org.md`** |
 | 9 | Hosted service on frepro.org | **Scripts ready — provision manually** |
 | 10 | Pilot (Sudan National Trend Party) + handover | **Handover kit ready — pilot TBD** |
 | 11 | Final check | **Complete** |

@@ -4,7 +4,7 @@
         <h1 class="text-3xl font-bold mb-10">{{ __('Leadership') }}</h1>
 
         @php
-            $grouped = $people->groupBy(fn($p) => $p->group?->label() ?? 'Other');
+            $grouped = $people->groupBy(fn($p) => $p->group?->label() ?? __('Other'));
         @endphp
 
         @foreach($grouped as $groupName => $members)

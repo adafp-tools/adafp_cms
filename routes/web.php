@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 // Root redirect to default locale
 Route::get('/', [HomeController::class, 'redirect'])->name('public.root');
 
+// /demo — redirect to /{locale}/demo (only meaningful in demo mode; 404 otherwise)
+Route::get('/demo', [DemoPageController::class, 'redirect'])->name('public.demo.root');
+
 // Non-locale utility routes
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('public.sitemap');
 Route::get('/robots.txt', [RobotsController::class, 'index'])->name('public.robots');

@@ -115,7 +115,8 @@ class CmsInstall extends Command
         }
 
         // Store settings
-        \App\Models\Setting::set('active_locales', json_encode([$defaultLocale]));
+        \App\Models\Setting::set('active_locales', $defaultLocale);
+        \App\Models\Setting::set('default_locale', $defaultLocale);
         \App\Models\Setting::set('org_name', $orgName);
 
         // Exposure test

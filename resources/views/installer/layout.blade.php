@@ -13,6 +13,16 @@
             <h1 class="text-2xl font-serif font-bold text-slate-800">
                 {{ config('cms.product_name') }} — {{ __('Installation') }}
             </h1>
+            {{-- Installer UI language selector --}}
+            <div class="mt-3 flex justify-center gap-2 text-sm" aria-label="{{ __('Language') }}">
+                @foreach(config('cms.supported_locales', ['en','fr','pt','ar']) as $lang)
+                    @php $active = app()->getLocale() === $lang; @endphp
+                    <a href="{{ route('installer.lang', $lang) }}"
+                       class="px-2 py-0.5 rounded {{ $active ? 'bg-blue-600 text-white font-semibold' : 'text-slate-500 hover:text-slate-800' }}"
+                       @if($active) aria-current="true" @endif
+                    >{{ strtoupper($lang) }}</a>
+                @endforeach
+            </div>
         </header>
 
         {{-- Step indicator --}}

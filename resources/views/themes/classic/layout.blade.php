@@ -53,7 +53,7 @@
         </a>
 
         @if(count($activeLocales ?? []) > 1)
-            <nav aria-label="Language" class="flex gap-2 text-sm">
+            <nav aria-label="{{ __('Language') }}" class="flex gap-2 text-sm">
                 @foreach($activeLocales as $lang)
                     <a href="{{ route('public.home', $lang) }}"
                        class="uppercase px-1 focus:ring-2 focus:ring-[var(--color-text-on-primary)] focus:outline-none rounded
@@ -66,7 +66,7 @@
         @endif
 
         @if(!empty($headerMenu))
-            <nav aria-label="Main menu">
+            <nav aria-label="{{ __('Main menu') }}">
                 <ul class="flex flex-wrap gap-4 text-sm font-medium list-none p-0 m-0">
                     @foreach($headerMenu as $item)
                         <li>
@@ -90,7 +90,7 @@
     <div class="max-w-6xl mx-auto px-4 text-sm text-center">
         <p>{{ $siteName }} &middot; {{ $currentYear }}</p>
         @if(!empty($footerMenu))
-            <nav aria-label="Footer menu" class="mt-3">
+            <nav aria-label="{{ __('Footer menu') }}" class="mt-3">
                 <ul class="flex flex-wrap justify-center gap-4 list-none p-0 m-0">
                     @foreach($footerMenu as $item)
                         <li>
