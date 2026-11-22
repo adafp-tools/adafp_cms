@@ -33,12 +33,12 @@
 
 @if(config('cms.instance') === 'demo')
     <div class="bg-yellow-400 text-center text-sm py-1 font-medium text-gray-900">
-        Demo site — not real party data
+        {{ __('Demo site — not real party data') }}
     </div>
 @endif
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 bg-white px-4 py-2 rounded shadow z-50">
-    Skip to content
+    {{ __('Skip to content') }}
 </a>
 
 <header class="border-b border-gray-100 bg-white">
@@ -49,7 +49,7 @@
         </a>
 
         @if(!empty($headerMenu))
-            <nav aria-label="Main menu">
+            <nav aria-label="{{ __('Main menu') }}">
                 <ul class="flex flex-wrap gap-6 text-sm font-semibold list-none p-0 m-0">
                     @foreach($headerMenu as $item)
                         <li>
@@ -65,7 +65,7 @@
 
         <div class="flex items-center gap-4">
             @if(count($activeLocales ?? []) > 1)
-                <nav aria-label="Language" class="flex gap-2 text-xs">
+                <nav aria-label="{{ __('Language') }}" class="flex gap-2 text-xs">
                     @foreach($activeLocales as $lang)
                         <a href="{{ route('public.home', $lang) }}"
                            class="uppercase px-1 py-0.5 rounded focus:ring-2 focus:ring-gray-400 focus:outline-none
@@ -79,7 +79,7 @@
             <a href="{{ route('public.page.show', ['locale' => $locale, 'slug' => 'join']) }}"
                class="px-4 py-2 bg-[var(--color-secondary)] text-white rounded font-semibold text-sm
                       hover:opacity-90 focus:ring-2 focus:ring-gray-400 focus:outline-none">
-                Join us
+                {{ __('Join us') }}
             </a>
         </div>
     </div>
@@ -94,7 +94,7 @@
         <p class="font-semibold text-lg mb-2">{{ $siteName }}</p>
         <p class="opacity-75">&copy; {{ $currentYear }}</p>
         @if(!empty($footerMenu))
-            <nav aria-label="Footer menu" class="mt-4">
+            <nav aria-label="{{ __('Footer menu') }}" class="mt-4">
                 <ul class="flex flex-wrap gap-4 list-none p-0 m-0">
                     @foreach($footerMenu as $item)
                         <li>

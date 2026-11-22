@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'contact_title'  => 'Nous contacter',
+    'join_title'     => 'Adhérer au parti',
+    'name'           => 'Nom complet',
+    'email'          => 'Adresse e-mail',
+    'phone'          => 'Numéro de téléphone',
+    'subject'        => 'Objet',
+    'message'        => 'Message',
+    'dob'            => 'Date de naissance',
+    'address'        => 'Adresse',
+    'party_role'     => 'Je souhaite',
+    'role_member'    => 'Devenir membre',
+    'role_volunteer' => 'Être bénévole',
+    'role_candidate' => 'Me présenter comme candidat(e)',
+    'consent_label'  => 'Je consens à ce que mes données personnelles soient stockées et utilisées pour répondre à cette demande',
+    'privacy_policy' => 'Politique de confidentialité',
+    'submit_contact' => 'Envoyer le message',
+    'submit_join'    => 'Soumettre la candidature',
+    'success_contact'=> 'Merci pour votre message. Nous vous répondrons dans les meilleurs délais.',
+    'success_join'   => 'Merci pour votre candidature. Nous l\'examinerons et vous contacterons.',
+    'form_disabled'  => 'Ce formulaire est actuellement indisponible.',
+    'rate_limited'   => 'Trop de soumissions. Veuillez réessayer plus tard.',
+];

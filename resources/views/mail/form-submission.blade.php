@@ -1,28 +1,28 @@
 @component('mail::message')
-**New {{ ucfirst($submission->form_type) }} form submission**
+**{{ __('New :type form submission', ['type' => ucfirst($submission->form_type)]) }}**
 
-**Name:** {{ $submission->name }}
-**Email:** {{ $submission->email }}
+**{{ __('Name:') }}** {{ $submission->name }}
+**{{ __('Email:') }}** {{ $submission->email }}
 @if($submission->phone)
-**Phone:** {{ $submission->phone }}
+**{{ __('Phone:') }}** {{ $submission->phone }}
 @endif
 @if($submission->subject)
-**Subject:** {{ $submission->subject }}
+**{{ __('Subject:') }}** {{ $submission->subject }}
 @endif
 @if($submission->message)
-**Message:**
+**{{ __('Message:') }}**
 {{ $submission->message }}
 @endif
 @if($submission->party_role)
-**Role requested:** {{ $submission->party_role }}
+**{{ __('Role requested:') }}** {{ $submission->party_role }}
 @endif
 @if($submission->dob)
-**Date of birth:** {{ $submission->dob->format('d M Y') }}
+**{{ __('Date of birth:') }}** {{ $submission->dob->format('d M Y') }}
 @endif
 @if($submission->address)
-**Address:** {{ $submission->address }}
+**{{ __('Address:') }}** {{ $submission->address }}
 @endif
 
-**Received:** {{ $submission->created_at->toDateTimeString() }}
-**Locale:** {{ $submission->locale }}
+**{{ __('Received:') }}** {{ $submission->created_at->toDateTimeString() }}
+**{{ __('Locale:') }}** {{ $submission->locale }}
 @endcomponent

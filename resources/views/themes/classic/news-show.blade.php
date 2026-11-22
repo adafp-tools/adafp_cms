@@ -25,7 +25,7 @@
         <footer class="mt-10 pt-6 border-t border-gray-200">
             <a href="{{ route('public.news.index', $locale) }}"
                class="text-[var(--color-primary)] hover:underline focus:ring-2 focus:ring-gray-400 focus:outline-none rounded">
-                &larr; Back to News
+                {{ __('← Back to News') }}
             </a>
         </footer>
     </article>

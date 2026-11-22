@@ -5,11 +5,11 @@
     <section class="bg-[var(--color-primary)] text-[var(--color-text-on-primary)] py-24">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h1 class="text-5xl font-extrabold leading-tight mb-6">{{ $siteName }}</h1>
-            <p class="text-xl opacity-90 mb-10">Together we build the future.</p>
+            <p class="text-xl opacity-90 mb-10">{{ __('Together we build the future.') }}</p>
             <a href="{{ route('public.page.show', ['locale' => $locale, 'slug' => 'join']) }}"
                class="inline-block px-8 py-4 bg-[var(--color-secondary)] text-white text-lg font-bold rounded-lg
                       hover:opacity-90 focus:ring-4 focus:ring-white focus:outline-none">
-                Join us today
+                {{ __('Join us today') }}
             </a>
         </div>
     </section>
@@ -28,7 +28,7 @@
 
     @if($manifestoPages->count() > 0)
     <section class="max-w-4xl mx-auto px-4 py-16">
-        <h2 class="text-2xl font-bold mb-6 text-center">Our Programme</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">{{ __('Our Programme') }}</h2>
         <ul class="space-y-3 list-none p-0">
             @foreach($manifestoPages as $mp)
                 @php $mt = $mp->translation($locale) ?? $mp->translations->first(); @endphp
@@ -48,7 +48,7 @@
     @if($posts->count() > 0)
     <section class="bg-gray-50 py-14">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Latest News</h2>
+            <h2 class="text-2xl font-bold mb-6">{{ __('Latest News') }}</h2>
             <ul class="space-y-4 list-none p-0">
                 @foreach($posts->take(5) as $post)
                     @php $t = $post->translation($locale) ?? $post->translations->first(); @endphp
@@ -66,7 +66,7 @@
             <div class="mt-6 text-end">
                 <a href="{{ route('public.news.index', $locale) }}"
                    class="text-[var(--color-primary)] font-medium hover:underline focus:ring-2 focus:ring-gray-400 focus:outline-none rounded">
-                    All news &rarr;
+                    {{ __('All news →') }}
                 </a>
             </div>
         </div>

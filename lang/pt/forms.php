@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'contact_title'  => 'Contacte-nos',
+    'join_title'     => 'Aderir ao partido',
+    'name'           => 'Nome completo',
+    'email'          => 'Endereço de e-mail',
+    'phone'          => 'Número de telefone',
+    'subject'        => 'Assunto',
+    'message'        => 'Mensagem',
+    'dob'            => 'Data de nascimento',
+    'address'        => 'Morada',
+    'party_role'     => 'Quero',
+    'role_member'    => 'Tornar-me membro',
+    'role_volunteer' => 'Ser voluntário(a)',
+    'role_candidate' => 'Candidatar-me',
+    'consent_label'  => 'Consinto que os meus dados pessoais sejam armazenados e utilizados para responder a este pedido',
+    'privacy_policy' => 'Política de privacidade',
+    'submit_contact' => 'Enviar mensagem',
+    'submit_join'    => 'Submeter candidatura',
+    'success_contact'=> 'Obrigado pela sua mensagem. Entraremos em contacto em breve.',
+    'success_join'   => 'Obrigado pela sua candidatura. Iremos analisá-la e contactá-lo(a).',
+    'form_disabled'  => 'Este formulário está actualmente indisponível.',
+    'rate_limited'   => 'Demasiadas submissões. Por favor, tente novamente mais tarde.',
+];

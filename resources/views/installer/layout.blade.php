@@ -11,18 +11,18 @@
     <div class="max-w-2xl mx-auto px-4 py-10">
         <header class="mb-8 text-center">
             <h1 class="text-2xl font-serif font-bold text-slate-800">
-                {{ config('cms.product_name') }} — Installation
+                {{ config('cms.product_name') }} — {{ __('Installation') }}
             </h1>
         </header>
 
         {{-- Step indicator --}}
         <nav class="flex justify-center gap-2 mb-8 text-sm" aria-label="Installation steps">
             @foreach([
-                ['requirements', 'Requirements'],
-                ['database',     'Database'],
-                ['site',         'Site details'],
-                ['owner',        'Owner account'],
-                ['finalize',     'Finalize'],
+                ['requirements', __('Requirements')],
+                ['database',     __('Database')],
+                ['site',         __('Site details')],
+                ['owner',        __('Owner account')],
+                ['finalize',     __('Finalize')],
             ] as [$step, $label])
                 @php $active = request()->routeIs("installer.{$step}*"); @endphp
                 <span class="px-3 py-1 rounded-full {{ $active ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600' }}">

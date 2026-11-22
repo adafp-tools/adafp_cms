@@ -1,10 +1,10 @@
 @extends($layout)
 @section('content')
     <section class="max-w-6xl mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold mb-10">Leadership</h1>
+        <h1 class="text-3xl font-bold mb-10">{{ __('Leadership') }}</h1>
 
         @php
-            $grouped = $people->groupBy(fn($p) => $p->group?->label() ?? 'Other');
+            $grouped = $people->groupBy(fn($p) => $p->group?->label() ?? __('Other'));
         @endphp
 
         @foreach($grouped as $groupName => $members)
