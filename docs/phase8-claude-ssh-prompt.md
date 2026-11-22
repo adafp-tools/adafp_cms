@@ -1,7 +1,12 @@
 # Claude SSH deployment prompt — cms.adafp.org
 
+> **Updated for v0.2.0** — ZIP now includes `vendor/` and `public/build/`;
+> `composer install` and `npm run build` on the server are no longer needed.
+> New `.env` keys: `CMS_DEMO_ADMIN_EMAIL`, `CMS_DEMO_ADMIN_PASSWORD`.
+> After deploy, run `cms:demo-reset` to seed demo content.
+
 Paste this prompt into a Claude Code session that has SSH access to `cms.adafp.org`.
-Fill in the three values marked **[YOU FILL IN]** before pasting.
+Fill in the four values marked **[YOU FILL IN]** before pasting.
 
 ---
 
@@ -14,6 +19,7 @@ print the admin login URL and credentials in a clearly labelled block.
 SSH_USER=[YOU FILL IN]            # e.g. deploy  or  root  or  adil
 REMOTE_DIR=[YOU FILL IN]          # e.g. /home/deploy/cms  or  /var/www/cms
 DB_PASSWORD=[YOU FILL IN]         # strong MySQL password for cms_user
+DEMO_PASSWORD=[YOU FILL IN]       # password shown on /demo page (e.g. Demo2026!)
 
 Fixed values (do not change):
   HOST          = cms.adafp.org
@@ -46,16 +52,15 @@ Fixed values (do not change):
      ssh ${SSH_USER}@cms.adafp.org "mysql -u root -p < /tmp/setup.sql && rm /tmp/setup.sql"
 
 2. UPLOAD AND EXTRACT
-   The release ZIP is storage/releases/cms-0.1.0-20261122.zip in the
-   adafp-tools/adafp_tools_cms repository. If you have the repo cloned
-   locally, use that path. If not, build it first:
-     git clone https://github.com/adafp-tools/adafp_tools_cms.git
-     cd adafp_tools_cms && composer install && npm ci && npm run build
-     php artisan cms:release
+   The release ZIP is cms-0.2.0-20261122.zip (download from the GitHub
+   release at github.com/adafp-tools/adafp_tools_cms/releases/tag/v0.2.0,
+   or copy from storage/releases/ on the build server).
+
+   The ZIP includes vendor/ and public/build/ — no composer install or
+   npm run build is needed on the server.
 
    Upload:
-     scp storage/releases/cms-0.1.0-20261122.zip \
-         ${SSH_USER}@cms.adafp.org:/tmp/cms-release.zip
+     scp cms-0.2.0-20261122.zip ${SSH_USER}@cms.adafp.org:/tmp/cms-release.zip
 
    Extract on server:
      ssh ${SSH_USER}@cms.adafp.org "
@@ -63,11 +68,6 @@ Fixed values (do not change):
        unzip -o /tmp/cms-release.zip -d ${REMOTE_DIR}
        rm /tmp/cms-release.zip
      "
-
-3. INSTALL COMPOSER DEPENDENCIES
-   ssh ${SSH_USER}@cms.adafp.org "
-     cd ${REMOTE_DIR} && composer install --no-dev --optimize-autoloader
-   "
 
 4. WRITE .env
    Generate a secure APP_KEY (run locally):
@@ -114,6 +114,8 @@ MAIL_FROM_NAME=\"Party Sites CMS\"
 CMS_INSTANCE=demo
 CMS_PRODUCT_NAME=\"Party Sites CMS\"
 CMS_PANEL_PATH=panel
+CMS_DEMO_ADMIN_EMAIL=demo@cms.adafp.org
+CMS_DEMO_ADMIN_PASSWORD=${DEMO_PASSWORD}
 CMS_DEMO_MAIL_ALLOWLIST=abdelaati@gmail.com
 ENV"
 
@@ -181,34 +183,50 @@ PHP
      echo 'Site marked as installed.'
    "
 
-9. CONFIGURE CRON (add to the server's crontab)
-   ssh ${SSH_USER}@cms.adafp.org "crontab -l 2>/dev/null; echo '* * * * * php ${REMOTE_DIR}/artisan schedule:run >> /dev/null 2>&1'" | ssh ${SSH_USER}@cms.adafp.org crontab -
+9. SEED DEMO CONTENT
+   ssh ${SSH_USER}@cms.adafp.org "
+     cd ${REMOTE_DIR} && php artisan cms:demo-reset && echo 'Demo content seeded.'
+   "
+   This seeds the fictional party in four languages and creates the demo admin
+   account using CMS_DEMO_ADMIN_EMAIL / CMS_DEMO_ADMIN_PASSWORD from .env.
 
-10. POINT WEB ROOT
+10. CONFIGURE CRON (add to the server's crontab)
+    (crontab -l 2>/dev/null | grep -v 'artisan schedule:run'; echo "* * * * * php ${REMOTE_DIR}/artisan schedule:run >> /dev/null 2>&1") | ssh ${SSH_USER}@cms.adafp.org crontab -
+
+11. POINT WEB ROOT
     Set your web server's document root to: ${REMOTE_DIR}/public
     For Nginx:  root ${REMOTE_DIR}/public;
     For Apache: set DocumentRoot / cPanel document root to that path.
 
 --- VERIFY ---
 
-Check the site responds:
-  curl -I https://cms.adafp.org/en/
+Check the site and demo mode respond correctly:
+  ssh ${SSH_USER}@cms.adafp.org "curl -sI https://cms.adafp.org/en/ | head -2"
+  ssh ${SSH_USER}@cms.adafp.org "curl -sI https://cms.adafp.org/en/ | grep -i robots"
+  ssh ${SSH_USER}@cms.adafp.org "curl -sI https://cms.adafp.org/en/demo | head -2"
+  ssh ${SSH_USER}@cms.adafp.org "curl -sI https://cms.adafp.org/panel | head -2"
 
-Expected: HTTP/2 200
+Expected:
+  - All return HTTP 200
+  - robots header returns: x-robots-tag: noindex, nofollow
 
 --- CREDENTIALS TO REPORT ---
 
 At the end, print exactly this block with the real values filled in:
 
-  ┌─────────────────────────────────────────────┐
-  │  cms.adafp.org — Admin credentials          │
-  │                                             │
-  │  URL:       https://cms.adafp.org/panel     │
-  │  Email:     abdelaati@gmail.com             │
-  │  Password:  [GENERATED_PASSWORD]            │
-  │                                             │
-  │  ⚠  Set up 2FA on first login.              │
-  └─────────────────────────────────────────────┘
+  ┌─────────────────────────────────────────────────────┐
+  │  cms.adafp.org — Admin credentials                  │
+  │                                                     │
+  │  URL:       https://cms.adafp.org/panel             │
+  │  Email:     abdelaati@gmail.com                     │
+  │  Password:  [GENERATED_PASSWORD from Step 8]        │
+  │                                                     │
+  │  Demo login (shown at /en/demo):                    │
+  │  Email:     demo@cms.adafp.org                      │
+  │  Password:  [DEMO_PASSWORD you set]                 │
+  │                                                     │
+  │  ⚠  Enable 2FA on first Owner login.                │
+  └─────────────────────────────────────────────────────┘
 
-Do NOT output the password anywhere else in the conversation.
+Do NOT output the Owner password anywhere else in the conversation.
 ```
