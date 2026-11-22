@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class TranslationCompletenessTest extends TestCase
 {
     private const LOCALES = ['fr', 'pt', 'ar'];
-    private const GROUPS = ['panel', 'forms', 'auth', 'pagination', 'passwords', 'validation'];
+    private const GROUPS = ['panel', 'forms', 'auth', 'pagination', 'passwords', 'validation', 'demo'];
     private string $langBase;
 
     protected function setUp(): void

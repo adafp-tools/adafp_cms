@@ -103,6 +103,14 @@
                 </ul>
             </nav>
         @endif
+        @if(config('cms.instance') === 'demo')
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="{{ route('public.demo', $locale) }}"
+                   class="text-yellow-400 hover:underline focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded text-xs">
+                    {{ __('demo.footer_link') }}
+                </a>
+            </div>
+        @endif
     </div>
 </footer>
 

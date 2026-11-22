@@ -26,20 +26,41 @@
             </div>
         @endif
 
+        @if(config('cms.instance') === 'demo')
+            <div class="mb-5 p-3 bg-yellow-50 border border-yellow-300 rounded text-xs text-gray-700 space-y-1">
+                <p class="font-semibold text-yellow-800">Demo credentials</p>
+                <p><span class="font-medium">Email:</span>
+                   <span class="font-mono select-all">{{ config('cms.demo_admin_email') }}</span></p>
+                <p x-data="{ show: false }">
+                    <span class="font-medium">Password:</span>
+                    <span class="font-mono select-all" x-show="show">{{ config('cms.demo_admin_password') }}</span>
+                    <span class="font-mono text-gray-400 tracking-widest" x-show="!show" aria-hidden="true">••••••••</span>
+                    <button type="button" @click="show = !show"
+                            class="ms-1 text-blue-600 hover:underline focus:outline-none"
+                            :aria-label="show ? 'Hide password' : 'Show password'">
+                        <span x-text="show ? 'hide' : 'show'"></span>
+                    </button>
+                </p>
+            </div>
+        @endif
+
         <form action="{{ route('panel.login.submit') }}" method="POST" class="space-y-4">
             @csrf
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1" for="email">Email</label>
-                <input id="email" name="email" type="email" value="{{ old('email') }}"
+                <input id="email" name="email" type="email"
+                    value="{{ old('email', config('cms.instance') === 'demo' ? config('cms.demo_admin_email') : '') }}"
                     autocomplete="email" autofocus required
                     class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
                 <div class="flex justify-between items-center mb-1">
                     <label class="text-sm font-medium text-slate-700" for="password">Password</label>
-                    <a href="{{ route('panel.password.request') }}" class="text-xs text-blue-600 hover:underline">
-                        Forgot password?
-                    </a>
+                    @if(config('cms.instance') !== 'demo')
+                        <a href="{{ route('panel.password.request') }}" class="text-xs text-blue-600 hover:underline">
+                            Forgot password?
+                        </a>
+                    @endif
                 </div>
                 <input id="password" name="password" type="password"
                     autocomplete="current-password" required

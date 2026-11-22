@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\DemoPageController;
 use App\Http\Controllers\Public\DocumentsController;
 use App\Http\Controllers\Public\EventController;
 use App\Http\Controllers\Public\FeedController;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 // Root redirect to default locale
 Route::get('/', [HomeController::class, 'redirect'])->name('public.root');
+
+// /demo — redirect to /{locale}/demo (only meaningful in demo mode; 404 otherwise)
+Route::get('/demo', [DemoPageController::class, 'redirect'])->name('public.demo.root');
 
 // Non-locale utility routes
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('public.sitemap');
@@ -41,6 +45,8 @@ Route::prefix('{locale}')
         Route::post('/contact', [ContactController::class, 'submit'])->name('public.contact.submit');
         Route::get('/join',     [JoinController::class, 'show'])->name('public.join');
         Route::post('/join',    [JoinController::class, 'submit'])->name('public.join.submit');
+        // Demo info page (before catch-all)
+        Route::get('/demo', [DemoPageController::class, 'show'])->name('public.demo');
         // Generic page slug last (catch-all within locale)
         Route::get('/{slug}', [PageController::class, 'show'])->name('public.page.show');
     });
